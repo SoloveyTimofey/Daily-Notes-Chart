@@ -7,11 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\DailyNotesChart.Application\DailyNotesChart.Application.csproj" />
+    <ProjectReference Include="..\..\Core\DailyNotesChart.Domain\DailyNotesChart.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\DailyNotesChart.Infructructure\DailyNotesChart.Infructructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\DailyNotesChart.Persistance\DailyNotesChart.Persistance.csproj" />
   </ItemGroup>
 
 </Project>

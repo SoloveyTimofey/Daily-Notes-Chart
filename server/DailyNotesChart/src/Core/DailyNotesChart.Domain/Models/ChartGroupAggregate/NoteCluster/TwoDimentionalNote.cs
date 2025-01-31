@@ -10,11 +10,14 @@ namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 
 public sealed class TwoDimentionalNote : NoteBase
 {
+    #pragma warning disable
+    private TwoDimentionalNote() { }
+    #pragma warning disable
     private TwoDimentionalNote(
         ChartId chartId,
         TimeOnly time,
         Color color,
-        NoteDescription? description,
+        NoteDescription description,
         double yAxeValue) : base(chartId, time, color, description)
     {
         YAxeValue = yAxeValue;

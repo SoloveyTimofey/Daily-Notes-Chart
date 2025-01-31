@@ -9,6 +9,9 @@ public sealed class ChartGroupName : ValueObject
     public const int NAME_MIN_LENGHT = 3;
     public const int NAME_MAX_LENGHT = 50;
 
+    #pragma warning disable
+    private ChartGroupName() { }
+    #pragma warning enable
     private ChartGroupName(string name) => Value = name;
 
     public string Value { get; }

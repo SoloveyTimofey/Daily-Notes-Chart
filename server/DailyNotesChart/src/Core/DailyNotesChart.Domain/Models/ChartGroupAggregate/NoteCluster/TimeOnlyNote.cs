@@ -8,11 +8,14 @@ namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 
 public sealed class TimeOnlyNote : NoteBase
 {
+    #pragma warning disable
+    private TimeOnlyNote() { }
+    #pragma warning enable
     private TimeOnlyNote(
         ChartId chartId,
         TimeOnly time,
         Color color,
-        NoteDescription? description) : base(chartId, time, color, description)
+        NoteDescription description) : base(chartId, time, color, description)
     {
     }
 

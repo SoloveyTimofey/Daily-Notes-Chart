@@ -8,6 +8,8 @@ public class YAxeValues : ValueObject
 {
     public const int MIN_VALUE = -10000;
     public const int MAX_VALUE = 10000;
+
+    private YAxeValues() { }
     private YAxeValues(double start, double end, bool isInteger)
     {
         Start = start;

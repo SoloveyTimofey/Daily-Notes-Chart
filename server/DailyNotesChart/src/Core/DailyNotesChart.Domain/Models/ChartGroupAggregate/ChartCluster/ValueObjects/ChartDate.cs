@@ -9,6 +9,7 @@ public sealed class ChartDate : ValueObject
     public static readonly DateOnly MIN_DATE = new(1900, 1, 1);
     public static readonly DateOnly MAX_DATE = new(2300, 1, 1);
 
+    private ChartDate() { }
     private ChartDate(DateOnly date) => Value = date;
 
     public DateOnly Value { get; }

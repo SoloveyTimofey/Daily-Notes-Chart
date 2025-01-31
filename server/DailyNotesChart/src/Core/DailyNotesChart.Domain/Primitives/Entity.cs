@@ -2,8 +2,11 @@
 
 public abstract class Entity<TId> where TId : class
 {
-    protected Entity(TId id) => Id = id;
-
+    #pragma warning disable
+    protected Entity() { }
+    #pragma warning enable
+    protected Entity(TId id) => Id 
+        = id;
     public TId Id { get; private init; }
 
     public static bool operator ==(Entity<TId>? first, Entity<TId>? second)

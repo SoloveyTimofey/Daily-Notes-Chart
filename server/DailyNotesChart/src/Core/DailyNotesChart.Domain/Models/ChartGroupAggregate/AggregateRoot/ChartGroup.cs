@@ -13,7 +13,9 @@ public sealed class ChartGroup : AggregateRoot<ChartGroupId>
 {
     private List<ChartBase> _charts = new();
     private List<NoteTemplate> _noteTemplates = new();
-
+    #pragma warning disable
+    private ChartGroup() { }
+    #pragma warning enable
     private ChartGroup(
         ChartGroupId id,
         ChartGroupName name,
@@ -34,7 +36,9 @@ public sealed class ChartGroup : AggregateRoot<ChartGroupId>
     public IReadOnlyCollection<ChartBase> Charts => _charts;
     public IReadOnlyCollection<NoteTemplate> NoteTemplates => _noteTemplates;
 
+    public NoteTemplateId? DefaultNoteTemplateId { get; private set; }
     public NoteTemplate? DefaultNoteTemplate { get; private set; }
+
     public DefaultChartTemplate DefaultChartTemplate { get; private set; }
 
     public static Result<ChartGroup> Create(ChartGroupName name, DefaultChartTemplate defaultChartTemplate) =>

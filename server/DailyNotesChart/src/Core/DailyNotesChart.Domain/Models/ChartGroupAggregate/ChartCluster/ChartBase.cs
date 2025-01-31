@@ -13,7 +13,7 @@ public abstract class ChartBase : Entity<ChartId>
     private List<NoteBase> _notes = new();
     protected ChartBase(
         ChartId id,
-        ChartSummary? summary,
+        ChartSummary summary,
         ChartDate date,
         ChartGroupId chartGroupId) : base(id)
     {
@@ -23,7 +23,7 @@ public abstract class ChartBase : Entity<ChartId>
     }
 
     public ChartDate Date { get; protected set; }
-    public ChartSummary? Summary { get; protected set; }
+    public ChartSummary Summary { get; protected set; }
     public IReadOnlyCollection<NoteBase> Notes => _notes;
     public ChartGroupId ChartGroupId { get; protected set; }
 

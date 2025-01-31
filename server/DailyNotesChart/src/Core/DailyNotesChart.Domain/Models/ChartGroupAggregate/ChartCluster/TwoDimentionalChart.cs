@@ -10,7 +10,7 @@ public sealed class TwoDimentionalChart : ChartBase
 {
     private TwoDimentionalChart(
         ChartId id,
-        ChartSummary? summary,
+        ChartSummary summary,
         ChartDate date,
         ChartGroupId chartGroupId,
         YAxeValues yAxeValues,
@@ -20,10 +20,34 @@ public sealed class TwoDimentionalChart : ChartBase
         YAxeName = yAxeName;
     }
 
+    // Return to this
+    private TwoDimentionalChart(
+        ChartId id,
+        ChartSummary summary,
+        ChartDate date,
+        ChartGroupId chartGroupId) : base(id, summary, date, chartGroupId)
+    {
+    }
+
     public YAxeValues YAxeValues { get; private set; }
     public YAxeName YAxeName { get; private set; }
 
-    public static Result<TwoDimentionalChart> Create(ChartSummary? summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
+    // Return to this
+    public static Result<TwoDimentionalChart> CreateEF(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
+        Result.Success(
+            new TwoDimentionalChart(
+                id: new ChartId(Guid.NewGuid()),
+                summary,
+                date,
+                chartGroupId
+            )
+            {
+                YAxeValues = yAxeValues,
+                YAxeName = yAxeName
+            }
+        );
+
+    public static Result<TwoDimentionalChart> Create(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
         Result.Success(
             new TwoDimentionalChart(
                 id: new ChartId(Guid.NewGuid()),

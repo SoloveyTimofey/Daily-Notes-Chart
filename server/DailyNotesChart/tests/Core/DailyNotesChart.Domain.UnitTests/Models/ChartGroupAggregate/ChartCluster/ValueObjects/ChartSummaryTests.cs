@@ -19,15 +19,15 @@ public sealed class ChartSummaryTests
     }
 
     [Test]
-    public void Create_PassTooShortSummary_ReturnsValidError()
+    public void Create_PassEmptySummary_ReturnsResultSuccess()
     {
         // Assign
-        var tooShortSummary = new string('a', ChartSummary.SUMMARY_MIN_LENGHT - 1);
+        var emptySummary = string.Empty;
 
         // Act
-        var result = ChartSummary.Create(tooShortSummary);
+        var result = ChartSummary.Create(emptySummary);
 
         // Assert
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.InvalidChartSummary));
+        Assert.That(result.IsSuccess);
     }
 }

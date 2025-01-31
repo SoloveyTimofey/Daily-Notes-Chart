@@ -7,11 +7,14 @@ namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
 
 public sealed class NoteTemplate : Entity<NoteTemplateId>
 {
+    #pragma warning disable
+    private NoteTemplate() { }
+    #pragma warning enable
     private NoteTemplate(
         NoteTemplateId id,
         ChartGroupId chartGroupId,
         Color color,
-        NoteDescription? description
+        NoteDescription description
         ) : base(id)
     {
         ChartGroupId = chartGroupId;
@@ -21,9 +24,9 @@ public sealed class NoteTemplate : Entity<NoteTemplateId>
 
     public ChartGroupId ChartGroupId { get; }
     public Color Color { get; }
-    public NoteDescription? Description { get; }
+    public NoteDescription Description { get; }
 
-    public static Result<NoteTemplate> Create(ChartGroupId chartGroupId, Color color, NoteDescription? description) =>
+    public static Result<NoteTemplate> Create(ChartGroupId chartGroupId, Color color, NoteDescription description) =>
         Result.Success(
             new NoteTemplate(
                 id: new NoteTemplateId(Guid.NewGuid()),

@@ -10,13 +10,13 @@ public sealed class TimeOnlyChart : ChartBase
 {
     private TimeOnlyChart(
         ChartId id,
-        ChartSummary? summary,
+        ChartSummary summary,
         ChartDate date,
         ChartGroupId chartGroupId) : base(id, summary, date, chartGroupId)
     {
     }
 
-    public static Result<TimeOnlyChart> Create(ChartSummary? summary, ChartDate date, ChartGroupId chartGroupId) =>
+    public static Result<TimeOnlyChart> Create(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId) =>
         Result.Success(
             new TimeOnlyChart(
                 id: new ChartId(Guid.NewGuid()),

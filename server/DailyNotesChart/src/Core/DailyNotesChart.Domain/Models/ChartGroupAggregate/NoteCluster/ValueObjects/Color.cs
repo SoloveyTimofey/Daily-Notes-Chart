@@ -7,6 +7,9 @@ namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObj
 
 public sealed class Color : ValueObject
 {
+    #pragma warning disable
+    private Color() { }
+    #pragma warning enable
     private Color(string color) => Value = color;
 
     public string Value { get; }

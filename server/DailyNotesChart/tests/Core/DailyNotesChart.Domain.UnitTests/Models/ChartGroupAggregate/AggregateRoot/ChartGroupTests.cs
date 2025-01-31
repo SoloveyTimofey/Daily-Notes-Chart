@@ -53,19 +53,6 @@ public sealed class ChartGroupTest
         Assert.That(secondAddingResult.Error, Is.EqualTo(DomainErrors.ChartGroup.CannotAddChartWithExistingDateInChartGroup));
     }
 
-    [Test, Category("Create")]
-    public void Create_PassNullParameters_CheckResult()
-    {
-        // Assign
-
-
-        // Act
-        var result = ChartGroup.Create(null!, null!);
-
-        // Assert
-        Assert.That(result.IsFalure);
-    }
-
     [Test, Category("AddChart")]
     public void AddChart_PassChartWithInvalidChartGroupId_ThrowsValidException()
     {

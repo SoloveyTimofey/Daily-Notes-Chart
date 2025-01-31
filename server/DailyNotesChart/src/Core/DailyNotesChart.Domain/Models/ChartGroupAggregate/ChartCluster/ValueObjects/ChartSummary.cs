@@ -6,9 +6,12 @@ namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueOb
 
 public sealed class ChartSummary : ValueObject
 {
-    public const int SUMMARY_MIN_LENGHT = 3;
+    public const int SUMMARY_MIN_LENGHT = 0;
     public const int SUMMARY_MAX_LENGHT = 500;
 
+    #pragma warning disable
+    private ChartSummary() { }
+    #pragma warning enable
     private ChartSummary(string summary) => Value = summary;
 
     public string Value { get; }

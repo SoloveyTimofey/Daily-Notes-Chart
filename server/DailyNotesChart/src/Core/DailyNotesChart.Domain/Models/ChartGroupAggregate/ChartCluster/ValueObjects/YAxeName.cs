@@ -9,6 +9,9 @@ public class YAxeName : ValueObject
     public const int NAME_MIN_LENGHT = 3;
     public const int NAME_MAX_LENGHT = 20;
 
+    #pragma warning disable
+    private YAxeName() { }
+    #pragma warning enable
     private YAxeName(string name) => Value = name;
 
     public string Value { get; }
