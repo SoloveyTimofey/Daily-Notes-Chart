@@ -1,4 +1,4 @@
-﻿using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster;
+﻿using DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

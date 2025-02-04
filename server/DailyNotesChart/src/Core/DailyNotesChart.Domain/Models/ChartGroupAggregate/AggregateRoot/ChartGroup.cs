@@ -1,7 +1,7 @@
 ﻿using DailyNotesChart.Domain.Errors;
+using DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.Exceptions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
-using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
@@ -107,21 +107,6 @@ public sealed class ChartGroup : AggregateRoot<ChartGroupId>
         _noteTemplates.Add(noteTemplateToAdd);
 
         return Result.Success();
-    }
-
-    /// <exception cref="PassNoteWithNonExistingChartIdInAggregateExeption"></exception>
-    public Result AddNoteToChart(NoteBase noteToAdd)
-    {
-        ChartBase? targetChart = _charts.FirstOrDefault(c => c.Id == noteToAdd.ChartId);
-
-        if (targetChart is null)
-        {
-            throw new PassNoteWithNonExistingChartIdInAggregateExeption($"You tried to add note with ChartId {noteToAdd.ChartId}, but this aggregate does not have chart with this id.");
-        }
-
-        var addNoteResult = targetChart.AddNote(noteToAdd);
-
-        return addNoteResult;
     }
 
     // TODO: Impelement other kinds of operations on Entities

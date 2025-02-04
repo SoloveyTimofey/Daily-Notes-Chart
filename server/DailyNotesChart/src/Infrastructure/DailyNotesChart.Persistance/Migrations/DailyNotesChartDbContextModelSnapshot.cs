@@ -22,31 +22,7 @@ namespace DailyNotesChart.Persistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ChartGroup", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("DefaultChartTemplate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("DefaultNoteTemplateId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DefaultNoteTemplateId");
-
-                    b.ToTable("ChartGroups");
-                });
-
-            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ChartBase", b =>
+            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot.ChartBase", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -76,6 +52,30 @@ namespace DailyNotesChart.Persistance.Migrations
                     b.HasDiscriminator().HasValue("ChartBase");
 
                     b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ChartGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DefaultChartTemplate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("DefaultNoteTemplateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DefaultNoteTemplateId");
+
+                    b.ToTable("ChartGroups");
                 });
 
             modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.NoteBase", b =>
@@ -140,16 +140,16 @@ namespace DailyNotesChart.Persistance.Migrations
                     b.ToTable("NoteTemplates");
                 });
 
-            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.TimeOnlyChart", b =>
+            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot.TimeOnlyChart", b =>
                 {
-                    b.HasBaseType("DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ChartBase");
+                    b.HasBaseType("DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot.ChartBase");
 
                     b.HasDiscriminator().HasValue("TimeOnlyChart");
                 });
 
-            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.TwoDimentionalChart", b =>
+            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot.TwoDimentionalChart", b =>
                 {
-                    b.HasBaseType("DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ChartBase");
+                    b.HasBaseType("DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot.ChartBase");
 
                     b.Property<string>("YAxeName")
                         .IsRequired()
@@ -176,6 +176,15 @@ namespace DailyNotesChart.Persistance.Migrations
                     b.HasDiscriminator().HasValue("TwoDimentionalNote");
                 });
 
+            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot.ChartBase", b =>
+                {
+                    b.HasOne("DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ChartGroup", null)
+                        .WithMany("Charts")
+                        .HasForeignKey("ChartGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ChartGroup", b =>
                 {
                     b.HasOne("DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster.NoteTemplate", "DefaultNoteTemplate")
@@ -185,18 +194,9 @@ namespace DailyNotesChart.Persistance.Migrations
                     b.Navigation("DefaultNoteTemplate");
                 });
 
-            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ChartBase", b =>
-                {
-                    b.HasOne("DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ChartGroup", null)
-                        .WithMany("Charts")
-                        .HasForeignKey("ChartGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.NoteBase", b =>
                 {
-                    b.HasOne("DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ChartBase", null)
+                    b.HasOne("DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot.ChartBase", null)
                         .WithMany("Notes")
                         .HasForeignKey("ChartId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -212,7 +212,7 @@ namespace DailyNotesChart.Persistance.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.TwoDimentionalChart", b =>
+            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot.TwoDimentionalChart", b =>
                 {
                     b.OwnsOne("DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects.YAxeValues", "YAxeValues", b1 =>
                         {
@@ -239,16 +239,16 @@ namespace DailyNotesChart.Persistance.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot.ChartBase", b =>
+                {
+                    b.Navigation("Notes");
+                });
+
             modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ChartGroup", b =>
                 {
                     b.Navigation("Charts");
 
                     b.Navigation("NoteTemplates");
-                });
-
-            modelBuilder.Entity("DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ChartBase", b =>
-                {
-                    b.Navigation("Notes");
                 });
 #pragma warning restore 612, 618
         }

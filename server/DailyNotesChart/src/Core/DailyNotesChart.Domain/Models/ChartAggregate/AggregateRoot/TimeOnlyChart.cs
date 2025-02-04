@@ -4,7 +4,7 @@ using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObject
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 using DailyNotesChart.Domain.Shared;
 
-namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster;
+namespace DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot;
 
 public sealed class TimeOnlyChart : ChartBase
 {

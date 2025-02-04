@@ -1,5 +1,5 @@
 ﻿using DailyNotesChart.Domain.Errors;
-using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster;
+using DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.Exceptions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects;

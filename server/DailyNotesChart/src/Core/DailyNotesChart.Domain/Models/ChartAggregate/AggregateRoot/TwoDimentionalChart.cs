@@ -4,7 +4,7 @@ using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObject
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 using DailyNotesChart.Domain.Shared;
 
-namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster;
+namespace DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot;
 
 public sealed class TwoDimentionalChart : ChartBase
 {
@@ -20,7 +20,11 @@ public sealed class TwoDimentionalChart : ChartBase
         YAxeName = yAxeName;
     }
 
+
+
+    #region For EF Core
     // Return to this
+    #pragma warning disable
     private TwoDimentionalChart(
         ChartId id,
         ChartSummary summary,
@@ -28,11 +32,8 @@ public sealed class TwoDimentionalChart : ChartBase
         ChartGroupId chartGroupId) : base(id, summary, date, chartGroupId)
     {
     }
+    #pragma warning enable
 
-    public YAxeValues YAxeValues { get; private set; }
-    public YAxeName YAxeName { get; private set; }
-
-    // Return to this
     public static Result<TwoDimentionalChart> CreateEF(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
         Result.Success(
             new TwoDimentionalChart(
@@ -46,6 +47,10 @@ public sealed class TwoDimentionalChart : ChartBase
                 YAxeName = yAxeName
             }
         );
+    #endregion
+
+    public YAxeValues YAxeValues { get; private set; }
+    public YAxeName YAxeName { get; private set; }
 
     public static Result<TwoDimentionalChart> Create(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
         Result.Success(

@@ -1,7 +1,7 @@
-﻿using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
+﻿using DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot;
+using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.Exceptions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
-using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects;
@@ -91,7 +91,7 @@ public sealed class ChartGroupTest
         // Assign
         var invalidChartGroupId = new ChartGroupId(Guid.NewGuid());
 
-        var noteTemplateToAdd = NoteTemplate.Create(invalidChartGroupId, Arg.Any<Color>(), Arg.Any<NoteDescription?>()).Value!;
+        var noteTemplateToAdd = NoteTemplate.Create(invalidChartGroupId, Arg.Any<Color>(), Arg.Any<NoteDescription>()).Value!;
 
         // Act & Assert
         Assert.Throws<ProvidedNoteTemplateWithInvalidChartGroupIdException>(
@@ -117,40 +117,11 @@ public sealed class ChartGroupTest
         Assert.That(_chartGroup.NoteTemplates, Does.Contain(noteTemplateToAdd));
     }
 
-    [Test, Category("AddNoteToChart")]
-    public void AddNoteToChart_PassNoteWithNonExestingChartIdInAggregate_ThrowsValidException()
-    {
-        // Assign
-        var invalidChartId = new ChartId(Guid.NewGuid());
-
-        var noteToAdd = TimeOnlyNote.Create(invalidChartId, Arg.Any<TimeOnly>(), Arg.Any<Color>(), Arg.Any<NoteDescription>()).Value!;
-
-        // Act && Assert
-        Assert.Throws<PassNoteWithNonExistingChartIdInAggregateExeption>(
-            () => _chartGroup.AddNoteToChart(noteToAdd)
-        );
-    }
-
-    [Test, Category("AddNoteToChart")]
-    public void AddNoteToChart_PassValidParameters_ReturnResultSuccess()
-    {
-        // Assign
-        var validChartId = _chartGroup.Charts.First().Id;
-
-        var noteToAdd = TimeOnlyNote.Create(validChartId, Arg.Any<TimeOnly>(), Arg.Any<Color>(), Arg.Any<NoteDescription>()).Value!;
-
-        // Act
-        var result = _chartGroup.AddNoteToChart(noteToAdd);
-
-        // Assert
-        Assert.That(result.IsSuccess);
-    }
-
     private void PopulateChartGroupWithEntities()
     {
         _chartGroup.AddChart(
             TimeOnlyChart.Create(
-                null,
+                Arg.Any<ChartSummary>(),
                 ChartDate.Create(DateOnly.FromDateTime(DateTime.UtcNow)).Value!,
                 _chartGroup.Id
             ).Value!

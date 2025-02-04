@@ -6,9 +6,9 @@ using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 using DailyNotesChart.Domain.Primitives;
 using DailyNotesChart.Domain.Shared;
 
-namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster;
+namespace DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot;
 
-public abstract class ChartBase : Entity<ChartId>
+public abstract class ChartBase : AggregateRoot<ChartId>
 {
     private List<NoteBase> _notes = new();
     protected ChartBase(
@@ -29,7 +29,7 @@ public abstract class ChartBase : Entity<ChartId>
 
     // Pattern: Template Method
     /// <exception cref="SpecifiedInvalidNoteTypeForChartException"/>
-    internal Result AddNote(NoteBase noteToAdd)
+    public Result AddNote(NoteBase noteToAdd)
     {
         var checkIfNoteTypeValidResult = CheckIfNoteTypeValid(noteToAdd);
 
