@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DailyNotesChart.Application.Operations.ChartGroups.Commands;
+using DailyNotesChart.Application.Operations.ChartGroups.Queries;
 using DailyNotesChart.WebApi.Requests.ChartGroups;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,7 @@ public class ChartGroupsController : ControllerBase
         return BadRequest(result.Error);
     }
 
-    [HttpPatch]
+    [HttpPatch, Route(nameof(SetDefaultNoteTemplate))]
     public async Task<IActionResult> SetDefaultNoteTemplate(SetDefaultNoteTemplateRequest request)
     {
         var command = _mapper.Map<SetDefaultNoteTemplateCommand>(request);
@@ -41,6 +42,21 @@ public class ChartGroupsController : ControllerBase
         if (result.IsSuccess)
         {
             return Ok();
+        }
+
+        return BadRequest(result.Error);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var query = new GetAllChartGroupsQuery();
+
+        var result = await _sender.Send(query);
+
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
         }
 
         return BadRequest(result.Error);

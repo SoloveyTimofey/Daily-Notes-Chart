@@ -1,6 +1,7 @@
 ﻿using DailyNotesChart.Domain.Abstractions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
+using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
 using DailyNotesChart.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,8 +11,28 @@ internal class ChartGroupRepository : Repository<ChartGroup, ChartGroupId>, ICha
 {
     public ChartGroupRepository(DailyNotesChartDbContext context) : base(context) { }
 
-    public async Task<bool> ChartGroupWithSpecifiedIdExistsAsync(ChartGroupId id)
+    public void CreateNoteTemplate(NoteTemplate noteTemplate)
     {
-        return await Context.Set<ChartGroup>().AnyAsync(x => x.Id == id);
+        Create<NoteTemplate, NoteTemplateId>(noteTemplate);
+    }
+
+    public void DeleteNoteTemplate(NoteTemplateId noteTemplateId)
+    {
+        Delete<NoteTemplate, NoteTemplateId>(noteTemplateId);
+    }
+
+    public IQueryable<ChartGroup> GetAll()
+    {
+        return Context.ChartGroups.AsNoTracking();
+    }
+
+    public Task<NoteTemplate?> GetNoteTemplateByIdAsync(NoteTemplateId id)
+    {
+        return GetByIdAsync<NoteTemplate, NoteTemplateId>(id);
+    }
+
+    public void UpdateNoteTemplate(NoteTemplate noteTemplate)
+    {
+        Update<NoteTemplate, NoteTemplateId>(noteTemplate);
     }
 }

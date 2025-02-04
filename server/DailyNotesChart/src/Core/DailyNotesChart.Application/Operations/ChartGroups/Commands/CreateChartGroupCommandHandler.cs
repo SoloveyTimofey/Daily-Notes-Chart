@@ -1,6 +1,6 @@
 ﻿using DailyNotesChart.Application.Abstractions.MediatrSpecific;
 using DailyNotesChart.Application.Abstractions.Persistance;
-using DailyNotesChart.Application.DTOs;
+using DailyNotesChart.Application.DTOs.ChartGroups;
 using DailyNotesChart.Application.Operations.NoteTemplates.Commands;
 using DailyNotesChart.Domain.Abstractions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
@@ -17,13 +17,11 @@ namespace DailyNotesChart.Application.Operations.ChartGroups.Commands;
 internal sealed class CreateChartGroupCommandHandler : CommandHandlerBase<ChartGroup>, ICommandHandler<CreateChartGroupCommand, ChartGroup>
 {
     private readonly IChartGroupRepository _chartGroupRepository;
-    private readonly INoteTemplateRepository _noteTemplateRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateChartGroupCommandHandler(IChartGroupRepository chartGroupRepository, INoteTemplateRepository noteTemplateRepository, IUnitOfWork unitOfWork)
+    public CreateChartGroupCommandHandler(IChartGroupRepository chartGroupRepository, IUnitOfWork unitOfWork)
     {
         _chartGroupRepository = chartGroupRepository;
-        _noteTemplateRepository = noteTemplateRepository;
         _unitOfWork = unitOfWork;
     }
 
@@ -98,7 +96,7 @@ internal sealed class CreateChartGroupCommandHandler : CommandHandlerBase<ChartG
         if (noteTemplateResult.IsFailure)
             return Failure<NoteTemplate>(noteTemplateResult);
 
-        _noteTemplateRepository.Create(noteTemplateResult.Value!);
+        _chartGroupRepository.CreateNoteTemplate(noteTemplateResult.Value!);
 
         return Result.Success(noteTemplateResult.Value!);
     }

@@ -12,12 +12,10 @@ namespace DailyNotesChart.Application.Operations.NoteTemplates.Commands;
 public sealed class CreateNoteTemplateCommandHandler : CommandHandlerBase<NoteTemplate>, ICommandHandler<CreateNoteTemplateCommand, NoteTemplate>
 {
     private readonly IChartGroupRepository _chartGroupRepository;
-    private readonly INoteTemplateRepository _noteTemplateRepository;
 
-    public CreateNoteTemplateCommandHandler(IChartGroupRepository chartGroupRepository, INoteTemplateRepository noteTemplateRepository)
+    public CreateNoteTemplateCommandHandler(IChartGroupRepository chartGroupRepository)
     {
         _chartGroupRepository = chartGroupRepository;
-        _noteTemplateRepository = noteTemplateRepository;
     }
 
     public async Task<Result<NoteTemplate>> Handle(CreateNoteTemplateCommand request, CancellationToken cancellationToken)
@@ -37,7 +35,7 @@ public sealed class CreateNoteTemplateCommandHandler : CommandHandlerBase<NoteTe
         if (noteTemplateResult.IsFailure) 
             return Failure(noteTemplateResult);
 
-        _noteTemplateRepository.Create(noteTemplateResult.Value!);
+        _chartGroupRepository.CreateNoteTemplate(noteTemplateResult.Value!);
 
         return Result.Success(noteTemplateResult.Value!);
     }

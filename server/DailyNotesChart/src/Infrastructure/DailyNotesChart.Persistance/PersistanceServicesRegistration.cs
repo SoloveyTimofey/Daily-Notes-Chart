@@ -29,7 +29,6 @@ public static class PersistanceServicesRegistration
         }));
 
         services.AddScoped<IChartGroupRepository, ChartGroupRepository>();
-        services.AddScoped<INoteTemplateRepository, NoteTemplateRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;

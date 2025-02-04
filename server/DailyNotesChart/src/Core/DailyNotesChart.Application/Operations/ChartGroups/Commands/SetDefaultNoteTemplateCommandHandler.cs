@@ -10,12 +10,10 @@ namespace DailyNotesChart.Application.Operations.ChartGroups.Commands;
 public sealed class SetDefaultNoteTemplateCommandHandler : CommandHandlerBase<Result>, ICommandHandler<SetDefaultNoteTemplateCommand>
 {
     private readonly IChartGroupRepository _chartGroupRepository;
-    private readonly INoteTemplateRepository _noteTemplateRepository;
 
-    public SetDefaultNoteTemplateCommandHandler(IChartGroupRepository chartGroupRepository, INoteTemplateRepository noteTemplateRepository)
+    public SetDefaultNoteTemplateCommandHandler(IChartGroupRepository chartGroupRepository)
     {
         _chartGroupRepository = chartGroupRepository;
-        _noteTemplateRepository = noteTemplateRepository;
     }
 
     public async Task<Result> Handle(SetDefaultNoteTemplateCommand request, CancellationToken cancellationToken)
@@ -25,7 +23,7 @@ public sealed class SetDefaultNoteTemplateCommandHandler : CommandHandlerBase<Re
         if (chartGroup is null)
             throw new EntityWithSpecifiedIdDoesNotExistException(nameof(ChartGroup), request.ChartGroupId.Id.ToString());
 
-        NoteTemplate? noteTemplate = await _noteTemplateRepository.GetByIdAsync(request.NoteTemplateId);
+        NoteTemplate? noteTemplate = await _chartGroupRepository.GetNoteTemplateByIdAsync(request.NoteTemplateId);
 
         if(noteTemplate is null)
             throw new EntityWithSpecifiedIdDoesNotExistException(nameof(NoteTemplate), request.NoteTemplateId.Id.ToString());

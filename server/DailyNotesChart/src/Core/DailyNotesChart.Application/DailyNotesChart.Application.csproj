@@ -13,11 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Operations\ChartGroups\Queries\" />
+    <ProjectReference Include="..\DailyNotesChart.Domain\DailyNotesChart.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DailyNotesChart.Domain\DailyNotesChart.Domain.csproj" />
+    <Folder Include="DTOs\Charts\" />
   </ItemGroup>
 
 </Project>
