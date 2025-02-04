@@ -219,41 +219,57 @@ for (i = 0, l = charts.length; i < l; i++) {
 
 var assemblies = [
   {
+    "name": "DailyNotesChart.Application",
+    "classes": [
+      { "name": "DailyNotesChart.Application.ApplicationServicesRegistration", "rp": "DailyNotesChart.Application_ApplicationServicesRegistration.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Application.Behaviors.UnitOfWorkBehaior<T1, T2>", "rp": "DailyNotesChart.Application_UnitOfWorkBehaior_2.html", "cl": 0, "ucl": 15, "cal": 15, "tl": 34, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Application.Behaviors.ValidationPipelineBehavior<T1, T2>", "rp": "DailyNotesChart.Application_ValidationPipelineBehavior_2.html", "cl": 0, "ucl": 33, "cal": 33, "tl": 58, "cb": 0, "tb": 12, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Application.DTOs.CreateDefaultChartTemplateDto", "rp": "DailyNotesChart.Application_CreateDefaultChartTemplateDto.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 8, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Application.DTOs.CreateNoteTemplateDto", "rp": "DailyNotesChart.Application_CreateNoteTemplateDto.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 9, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Application.Extensions.ResultExtensions", "rp": "DailyNotesChart.Application_ResultExtensions.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Application.Operations.ChartGroups.Commands.CreateChartGroupCommand", "rp": "DailyNotesChart.Application_CreateChartGroupCommand.html", "cl": 3, "ucl": 2, "cal": 5, "tl": 11, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Application.Operations.ChartGroups.Commands.CreateChartGroupCommandHandler", "rp": "DailyNotesChart.Application_CreateChartGroupCommandHandler.html", "cl": 10, "ucl": 48, "cal": 58, "tl": 113, "cb": 1, "tb": 24, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Application.Operations.ChartGroups.Commands.CreateChartGroupCommandValidator", "rp": "DailyNotesChart.Application_CreateChartGroupCommandValidator.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 14, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+    ]},
+  {
     "name": "DailyNotesChart.Domain",
     "classes": [
-      { "name": "DailyNotesChart.Domain.Errors.DomainErrors", "rp": "DailyNotesChart.Domain_DomainErrors.html", "cl": 30, "ucl": 0, "cal": 30, "tl": 65, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Exceptions.DomainException", "rp": "DailyNotesChart.Domain_DomainException.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 6, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ChartGroup", "rp": "DailyNotesChart.Domain_ChartGroup.html", "cl": 50, "ucl": 10, "cal": 60, "tl": 113, "cb": 8, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.DefaultChartTemplate", "rp": "DailyNotesChart.Domain_DefaultChartTemplate.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 5, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.Exceptions.PassNoteWithNonExistingChartIdInAggregateExeption", "rp": "DailyNotesChart.Domain_PassNoteWithNonExistingChartIdInAggregateExeption.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 8, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.Exceptions.ProvidedChartWithInvalidChartGroupIdException", "rp": "DailyNotesChart.Domain_ProvidedChartWithInvalidChartGroupIdException.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.Exceptions.ProvidedNoteTemplateWithInvalidChartGroupIdException", "rp": "DailyNotesChart.Domain_ProvidedNoteTemplateWithInvalidChartGroupIdException.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 8, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects.ChartGroupId", "rp": "DailyNotesChart.Domain_ChartGroupId.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects.ChartGroupName", "rp": "DailyNotesChart.Domain_ChartGroupName.html", "cl": 7, "ucl": 4, "cal": 11, "tl": 30, "cb": 4, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ChartBase", "rp": "DailyNotesChart.Domain_ChartBase.html", "cl": 22, "ucl": 0, "cal": 22, "tl": 54, "cb": 4, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.Exceptions.SpecifiedInvalidNoteTypeForChartException", "rp": "DailyNotesChart.Domain_SpecifiedInvalidNoteTypeForChartException.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 11, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.TimeOnlyChart", "rp": "DailyNotesChart.Domain_TimeOnlyChart.html", "cl": 27, "ucl": 0, "cal": 27, "tl": 53, "cb": 4, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.TwoDimentionalChart", "rp": "DailyNotesChart.Domain_TwoDimentionalChart.html", "cl": 36, "ucl": 0, "cal": 36, "tl": 66, "cb": 5, "tb": 6, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects.ChartDate", "rp": "DailyNotesChart.Domain_ChartDate.html", "cl": 9, "ucl": 4, "cal": 13, "tl": 30, "cb": 4, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects.ChartId", "rp": "DailyNotesChart.Domain_ChartId.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects.ChartSummary", "rp": "DailyNotesChart.Domain_ChartSummary.html", "cl": 7, "ucl": 4, "cal": 11, "tl": 30, "cb": 4, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects.YAxeName", "rp": "DailyNotesChart.Domain_YAxeName.html", "cl": 7, "ucl": 3, "cal": 10, "tl": 30, "cb": 4, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects.YAxeValues", "rp": "DailyNotesChart.Domain_YAxeValues.html", "cl": 22, "ucl": 6, "cal": 28, "tl": 49, "cb": 8, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.Exception.SpecifiedYAxeValuOutOfRangeException", "rp": "DailyNotesChart.Domain_SpecifiedYAxeValuOutOfRangeException.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 8, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.NoteBase", "rp": "DailyNotesChart.Domain_NoteBase.html", "cl": 15, "ucl": 0, "cal": 15, "tl": 28, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Errors.DomainErrors", "rp": "DailyNotesChart.Domain_DomainErrors.html", "cl": 9, "ucl": 24, "cal": 33, "tl": 69, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Exceptions.DomainException", "rp": "DailyNotesChart.Domain_DomainException.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 6, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ChartGroup", "rp": "DailyNotesChart.Domain_ChartGroup.html", "cl": 0, "ucl": 64, "cal": 64, "tl": 123, "cb": 0, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.DefaultChartTemplate", "rp": "DailyNotesChart.Domain_DefaultChartTemplate.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 5, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.Exceptions.PassNoteWithNonExistingChartIdInAggregateExeption", "rp": "DailyNotesChart.Domain_PassNoteWithNonExistingChartIdInAggregateExeption.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 8, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.Exceptions.ProvidedChartWithInvalidChartGroupIdException", "rp": "DailyNotesChart.Domain_ProvidedChartWithInvalidChartGroupIdException.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.Exceptions.ProvidedNoteTemplateWithInvalidChartGroupIdException", "rp": "DailyNotesChart.Domain_ProvidedNoteTemplateWithInvalidChartGroupIdException.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 8, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects.ChartGroupId", "rp": "DailyNotesChart.Domain_ChartGroupId.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects.ChartGroupName", "rp": "DailyNotesChart.Domain_ChartGroupName.html", "cl": 5, "ucl": 7, "cal": 12, "tl": 33, "cb": 3, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ChartBase", "rp": "DailyNotesChart.Domain_ChartBase.html", "cl": 0, "ucl": 22, "cal": 22, "tl": 54, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.Exceptions.SpecifiedInvalidNoteTypeForChartException", "rp": "DailyNotesChart.Domain_SpecifiedInvalidNoteTypeForChartException.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 11, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.TimeOnlyChart", "rp": "DailyNotesChart.Domain_TimeOnlyChart.html", "cl": 0, "ucl": 27, "cal": 27, "tl": 53, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.TwoDimentionalChart", "rp": "DailyNotesChart.Domain_TwoDimentionalChart.html", "cl": 0, "ucl": 51, "cal": 51, "tl": 90, "cb": 0, "tb": 6, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects.ChartDate", "rp": "DailyNotesChart.Domain_ChartDate.html", "cl": 0, "ucl": 14, "cal": 14, "tl": 31, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects.ChartId", "rp": "DailyNotesChart.Domain_ChartId.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects.ChartSummary", "rp": "DailyNotesChart.Domain_ChartSummary.html", "cl": 0, "ucl": 12, "cal": 12, "tl": 33, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects.YAxeName", "rp": "DailyNotesChart.Domain_YAxeName.html", "cl": 0, "ucl": 12, "cal": 12, "tl": 35, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects.YAxeValues", "rp": "DailyNotesChart.Domain_YAxeValues.html", "cl": 0, "ucl": 29, "cal": 29, "tl": 51, "cb": 0, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.Exceptions.SpecifiedYAxeValuOutOfRangeException", "rp": "DailyNotesChart.Domain_SpecifiedYAxeValuOutOfRangeException.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 8, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.NoteBase", "rp": "DailyNotesChart.Domain_NoteBase.html", "cl": 0, "ucl": 16, "cal": 16, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.NoteId", "rp": "DailyNotesChart.Domain_NoteId.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.TimeOnlyNote", "rp": "DailyNotesChart.Domain_TimeOnlyNote.html", "cl": 11, "ucl": 16, "cal": 27, "tl": 48, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.TwoDimentionalNote", "rp": "DailyNotesChart.Domain_TwoDimentionalNote.html", "cl": 32, "ucl": 17, "cal": 49, "tl": 84, "cb": 6, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects.Color", "rp": "DailyNotesChart.Domain_Color.html", "cl": 8, "ucl": 4, "cal": 12, "tl": 30, "cb": 2, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects.NoteDescription", "rp": "DailyNotesChart.Domain_NoteDescription.html", "cl": 5, "ucl": 6, "cal": 11, "tl": 30, "cb": 2, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster.NoteTemplate", "rp": "DailyNotesChart.Domain_NoteTemplate.html", "cl": 15, "ucl": 6, "cal": 21, "tl": 41, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster.NoteTemplateId", "rp": "DailyNotesChart.Domain_NoteTemplateId.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Primitives.AggregateRoot<T>", "rp": "DailyNotesChart.Domain_AggregateRoot_1.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 6, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Primitives.Entity<T>", "rp": "DailyNotesChart.Domain_Entity_1.html", "cl": 8, "ucl": 9, "cal": 17, "tl": 33, "cb": 3, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.TimeOnlyNote", "rp": "DailyNotesChart.Domain_TimeOnlyNote.html", "cl": 0, "ucl": 28, "cal": 28, "tl": 51, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.TwoDimentionalNote", "rp": "DailyNotesChart.Domain_TwoDimentionalNote.html", "cl": 0, "ucl": 50, "cal": 50, "tl": 89, "cb": 0, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects.Color", "rp": "DailyNotesChart.Domain_Color.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 33, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects.NoteDescription", "rp": "DailyNotesChart.Domain_NoteDescription.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 33, "cb": 0, "tb": 6, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster.NoteTemplate", "rp": "DailyNotesChart.Domain_NoteTemplate.html", "cl": 0, "ucl": 22, "cal": 22, "tl": 44, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster.NoteTemplateId", "rp": "DailyNotesChart.Domain_NoteTemplateId.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Primitives.AggregateRoot<T>", "rp": "DailyNotesChart.Domain_AggregateRoot_1.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 7, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Primitives.Entity<T>", "rp": "DailyNotesChart.Domain_Entity_1.html", "cl": 0, "ucl": 19, "cal": 19, "tl": 36, "cb": 0, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "DailyNotesChart.Domain.Primitives.ValueObject", "rp": "DailyNotesChart.Domain_ValueObject.html", "cl": 0, "ucl": 12, "cal": 12, "tl": 24, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "DailyNotesChart.Domain.Shared.Error", "rp": "DailyNotesChart.Domain_Error.html", "cl": 9, "ucl": 1, "cal": 10, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Shared.Result", "rp": "DailyNotesChart.Domain_Result.html", "cl": 14, "ucl": 0, "cal": 14, "tl": 23, "cb": 6, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "DailyNotesChart.Domain.Shared.Result<T>", "rp": "DailyNotesChart.Domain_Result_1.html", "cl": 7, "ucl": 0, "cal": 7, "tl": 14, "cb": 1, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Shared.IValidationResult", "rp": "DailyNotesChart.Domain_IValidationResult.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Shared.Result", "rp": "DailyNotesChart.Domain_Result.html", "cl": 11, "ucl": 3, "cal": 14, "tl": 23, "cb": 4, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Shared.Result<T>", "rp": "DailyNotesChart.Domain_Result_1.html", "cl": 4, "ucl": 3, "cal": 7, "tl": 14, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Shared.ValidationResult", "rp": "DailyNotesChart.Domain_ValidationResult.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 13, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "DailyNotesChart.Domain.Shared.ValidationResult<T>", "rp": "DailyNotesChart.Domain_ValidationResult_1.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
@@ -262,9 +278,47 @@ var metrics = [{ "name": "Crap Score", "abbreviation": "crp", "explanationUrl": 
 var historicCoverageExecutionTimes = [];
 
 var riskHotspotMetrics = [
+      { "name": "Crap Score", "explanationUrl": "https://googletesting.blogspot.de/2011/02/this-code-is-crap.html" },
+      { "name": "Cyclomatic complexity", "explanationUrl": "https://en.wikipedia.org/wiki/Cyclomatic_complexity" },
 ];
 
 var riskHotspots = [
+  {
+    "assembly": "DailyNotesChart.Application", "class": "DailyNotesChart.Application.Behaviors.ValidationPipelineBehavior<T1, T2>", "reportPath": "DailyNotesChart.Application_ValidationPipelineBehavior_2.html", "methodName": "Handle()", "methodShortName": "Handle()", "fileIndex": 0, "line": 20,
+    "metrics": [
+      { "value": 110, "exceeded": true },
+      { "value": 10, "exceeded": false },
+    ]},
+  {
+    "assembly": "DailyNotesChart.Application", "class": "DailyNotesChart.Application.Operations.ChartGroups.Commands.CreateChartGroupCommandHandler", "reportPath": "DailyNotesChart.Application_CreateChartGroupCommandHandler.html", "methodName": "Handle(DailyNotesChart.Application.Operations.ChartGroups.Commands.CreateChartGroupCommand,System.Threading.CancellationToken)", "methodShortName": "Handle(...)", "fileIndex": 0, "line": 23,
+    "metrics": [
+      { "value": 106.23, "exceeded": true },
+      { "value": 14, "exceeded": false },
+    ]},
+  {
+    "assembly": "DailyNotesChart.Domain", "class": "DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects.YAxeValues", "reportPath": "DailyNotesChart.Domain_YAxeValues.html", "methodName": "Create(System.Double,System.Double,System.Boolean)", "methodShortName": "Create(...)", "fileIndex": 0, "line": 24,
+    "metrics": [
+      { "value": 72, "exceeded": true },
+      { "value": 8, "exceeded": false },
+    ]},
+  {
+    "assembly": "DailyNotesChart.Application", "class": "DailyNotesChart.Application.Operations.ChartGroups.Commands.CreateChartGroupCommandHandler", "reportPath": "DailyNotesChart.Application_CreateChartGroupCommandHandler.html", "methodName": "CreateDefaultNoteTemplate(DailyNotesChart.Application.DTOs.CreateNoteTemplateDto)", "methodShortName": "CreateDefaultNoteTemplate(...)", "fileIndex": 0, "line": 89,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
+    ]},
+  {
+    "assembly": "DailyNotesChart.Domain", "class": "DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects.NoteDescription", "reportPath": "DailyNotesChart.Domain_NoteDescription.html", "methodName": "Create(System.String)", "methodShortName": "Create(...)", "fileIndex": 0, "line": 18,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
+    ]},
+  {
+    "assembly": "DailyNotesChart.Domain", "class": "DailyNotesChart.Domain.Primitives.Entity<T>", "reportPath": "DailyNotesChart.Domain_Entity_1.html", "methodName": "Equals(System.Object)", "methodShortName": "Equals(...)", "fileIndex": 0, "line": 22,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
+    ]},
 ];
 
 var branchCoverageAvailable = true;

@@ -2,8 +2,6 @@
 
 namespace DailyNotesChart.Domain.Abstractions;
 
-public interface INoteTemplateRepository
+public interface INoteTemplateRepository : ICrudRepository<NoteTemplate, NoteTemplateId>
 {
-    /// <exception cref="ArgumentNullException"></exception>
-    NoteTemplate GetById(NoteTemplateId id);
 }

@@ -16,6 +16,10 @@ public static class DomainErrors
         public static readonly Error CannotAddChartWithExistingDateInChartGroup = new Error(
             "ChartGroup.CannotAddChartWithExistingDateInChartGroup",
             $"Cannot add chart. This chart group already has a chart with the same date.");
+
+        public static readonly Error NoteTemplateAlreadyAdded = new Error(
+            "ChartGroup.NoteTemplateAlreadyAdded",
+            $"Cannot add note template. This chart already has note template. Try change note template instead.");
     }
 
     public static class Chart

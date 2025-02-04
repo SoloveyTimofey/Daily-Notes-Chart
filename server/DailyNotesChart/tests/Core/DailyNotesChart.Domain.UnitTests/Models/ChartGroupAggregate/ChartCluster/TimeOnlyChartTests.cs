@@ -16,7 +16,7 @@ public sealed class TimeOnlyChartTests : ChartTestBase
     public void SetUp()
     {
         _chart = TimeOnlyChart.Create(
-            summary: null,
+            Arg.Any<ChartSummary>(),
             Arg.Any<ChartDate>(),
             Arg.Any<ChartGroupId>()
         ).Value!;
@@ -41,7 +41,7 @@ public sealed class TimeOnlyChartTests : ChartTestBase
         var result = _chart.AddNote(duplicateNote);
 
         // Assert
-        Assert.That(result.IsFalure);
+        Assert.That(result.IsFailure);
         Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.CannotAddNoteWithDuplicateCoordinates));
     }
 

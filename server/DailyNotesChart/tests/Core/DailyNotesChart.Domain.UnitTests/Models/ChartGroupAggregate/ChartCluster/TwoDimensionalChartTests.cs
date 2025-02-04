@@ -30,7 +30,7 @@ public sealed class TwoDimensionalChartTests : ChartTestBase
         var result = _chart.AddNote(duplicateNote);
 
         // Assert
-        Assert.That(result.IsFalure);
+        Assert.That(result.IsFailure);
         Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.CannotAddNoteWithDuplicateCoordinates));
     }
 

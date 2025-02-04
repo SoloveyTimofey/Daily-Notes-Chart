@@ -10,7 +10,8 @@ public class YAxeName : ValueObject
     public const int NAME_MAX_LENGHT = 20;
 
     #pragma warning disable
-    private YAxeName() { }
+    public YAxeName() { } // For JsonConverter
+
     #pragma warning enable
     private YAxeName(string name) => Value = name;
 
@@ -25,6 +26,8 @@ public class YAxeName : ValueObject
 
         return Result.Success(new YAxeName(name));
     }
+
+    public static YAxeName CreateDefault() => new YAxeName("Rate");
 
     public override IEnumerable<object> GetAtomicValues()
     {

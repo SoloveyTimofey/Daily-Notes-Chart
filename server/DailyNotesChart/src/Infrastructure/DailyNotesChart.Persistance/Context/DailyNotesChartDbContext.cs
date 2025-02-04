@@ -1,13 +1,13 @@
 ﻿using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
-using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace DailyNotesChart.Persistance.Context;
 
-internal sealed class DailyNotesChartDbContext : DbContext
+public sealed class DailyNotesChartDbContext : DbContext
 {
     public DailyNotesChartDbContext(DbContextOptions<DailyNotesChartDbContext> options) : base(options) { }
 
@@ -22,6 +22,6 @@ internal sealed class DailyNotesChartDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DailyNotesChartDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

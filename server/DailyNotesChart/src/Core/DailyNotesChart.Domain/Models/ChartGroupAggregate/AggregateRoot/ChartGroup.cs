@@ -2,6 +2,7 @@
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.Exceptions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster;
+using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
 using DailyNotesChart.Domain.Primitives;
@@ -41,8 +42,17 @@ public sealed class ChartGroup : AggregateRoot<ChartGroupId>
 
     public DefaultChartTemplate DefaultChartTemplate { get; private set; }
 
-    public static Result<ChartGroup> Create(ChartGroupName name, DefaultChartTemplate defaultChartTemplate) =>
-        Result.Success(
+    public static Result<ChartGroup> Create(ChartGroupName name, DefaultChartTemplate? defaultChartTemplate = null)
+    {
+        if (defaultChartTemplate is null)
+        {
+            var yAxeName = YAxeName.CreateDefault();
+            var yAxeValues = YAxeValues.CreateDefault();
+
+            defaultChartTemplate = new DefaultChartTemplate(yAxeName, yAxeValues);
+        }
+
+        return Result.Success(
             new ChartGroup(
                 id: new ChartGroupId(Guid.NewGuid()),
                 name,
@@ -52,18 +62,19 @@ public sealed class ChartGroup : AggregateRoot<ChartGroupId>
                 defaultChartTemplate
             )
         );
+    }
 
-    public static Result<ChartGroup> CreateWithDefaultNoteTemplate(ChartGroupName name, NoteTemplate defaultNoteTemplate, DefaultChartTemplate defaultChartTemplate) =>
-        Result.Success(
-            new ChartGroup(
-                id: new ChartGroupId(Guid.NewGuid()),
-                name,
-                charts: [],
-                noteTemplates: [],
-                defaultNoteTemplate,
-                defaultChartTemplate
-            )
-        );
+    public Result SetDefaultNoteTemplate(NoteTemplate noteTemplate)
+    {
+        if (noteTemplate.ChartGroupId != Id)
+        {
+            throw new ProvidedNoteTemplateWithInvalidChartGroupIdException(noteTemplate.ChartGroupId, Id);
+        }
+
+        DefaultNoteTemplate = noteTemplate;
+
+        return Result.Success();
+    }
 
 
     /// <exception cref="ProvidedChartWithInvalidChartGroupIdException"/>
@@ -90,7 +101,7 @@ public sealed class ChartGroup : AggregateRoot<ChartGroupId>
     {
         if (noteTemplateToAdd.ChartGroupId != Id)
         {
-            throw new ProvidedNoteTemplateWithInvalidChartGroupIdException($"You tried to add NoteTemplate with chartGroupdId {noteTemplateToAdd.ChartGroupId}, but expected {Id}.");
+            throw new ProvidedNoteTemplateWithInvalidChartGroupIdException(noteTemplateToAdd.ChartGroupId, Id);
         }
 
         _noteTemplates.Add(noteTemplateToAdd);

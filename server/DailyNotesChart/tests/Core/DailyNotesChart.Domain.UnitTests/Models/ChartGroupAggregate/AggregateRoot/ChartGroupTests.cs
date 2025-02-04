@@ -49,7 +49,7 @@ public sealed class ChartGroupTest
         // Assert
         Assert.That(firstAddingResult.IsSuccess);
 
-        Assert.That(secondAddingResult.IsFalure);
+        Assert.That(secondAddingResult.IsFailure);
         Assert.That(secondAddingResult.Error, Is.EqualTo(DomainErrors.ChartGroup.CannotAddChartWithExistingDateInChartGroup));
     }
 

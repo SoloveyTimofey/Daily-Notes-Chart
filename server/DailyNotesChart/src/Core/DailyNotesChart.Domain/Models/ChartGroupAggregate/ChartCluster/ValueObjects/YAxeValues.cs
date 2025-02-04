@@ -9,7 +9,8 @@ public class YAxeValues : ValueObject
     public const int MIN_VALUE = -10000;
     public const int MAX_VALUE = 10000;
 
-    private YAxeValues() { }
+    //private YAxeValues() { }
+    public YAxeValues() { } // For JsonConverter
     private YAxeValues(double start, double end, bool isInteger)
     {
         Start = start;

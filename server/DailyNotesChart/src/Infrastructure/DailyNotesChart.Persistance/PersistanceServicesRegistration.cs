@@ -1,5 +1,7 @@
-﻿using DailyNotesChart.Persistance.Context;
-using DailyNotesChart.Persistance.Options;
+﻿using DailyNotesChart.Application.Abstractions.Persistance;
+using DailyNotesChart.Domain.Abstractions;
+using DailyNotesChart.Persistance.Context;
+using DailyNotesChart.Persistance.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,23 +12,25 @@ public static class PersistanceServicesRegistration
 {
     public static IServiceCollection AddPersistanceServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.ConfigureOptions<DatabaseOptionsSetup>();
-
-        services.AddDbContext<DailyNotesChartDbContext>(dbContextOptionsBuilder =>
+        services.AddDbContext<DailyNotesChartDbContext>((Action<DbContextOptionsBuilder>?)(dbContextOptionsBuilder =>
         {
             DatabaseOptions options = GetDatabaseOptions(configuration);
 
-            dbContextOptionsBuilder.UseSqlServer(options.connectionString, sqlServerAction =>
+            dbContextOptionsBuilder.UseSqlServer((string)options.ConnectionString, (Action<Microsoft.EntityFrameworkCore.Infrastructure.SqlServerDbContextOptionsBuilder>)(sqlServerAction =>
             {
-                sqlServerAction.EnableRetryOnFailure(options.maxRetryCount);
+                sqlServerAction.EnableRetryOnFailure((int)options.MaxRetryCount);
 
-                sqlServerAction.CommandTimeout(options.commandTimeout);
-            });
+                sqlServerAction.CommandTimeout(options.CommandTimeout);
+            }));
 
-            dbContextOptionsBuilder.EnableSensitiveDataLogging(options.enableSensitiveDataLogging);
+            dbContextOptionsBuilder.EnableSensitiveDataLogging(options.EnableSensitiveDataLogging);
 
-            dbContextOptionsBuilder.EnableDetailedErrors(options.enableDetailedError);
-        });
+            dbContextOptionsBuilder.EnableDetailedErrors(options.EnableDetailedError);
+        }));
+
+        services.AddScoped<IChartGroupRepository, ChartGroupRepository>();
+        services.AddScoped<INoteTemplateRepository, NoteTemplateRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
@@ -44,5 +48,5 @@ public static class PersistanceServicesRegistration
         return new DatabaseOptions(connectionString, maxRetryCount, commandTimeout, enableDetailedError, enableSensitieDataLogging);
     }
 
-    private record DatabaseOptions(string connectionString, int maxRetryCount, int commandTimeout, bool enableDetailedError, bool enableSensitiveDataLogging);
+    private record DatabaseOptions(string ConnectionString, int MaxRetryCount, int CommandTimeout, bool EnableDetailedError, bool EnableSensitiveDataLogging);
 }
