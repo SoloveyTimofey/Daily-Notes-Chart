@@ -1,14 +1,13 @@
-﻿using DailyNotesChart.Application.Abstractions.MediatrSpecific;
-using DailyNotesChart.Application.Abstractions.Persistance;
+﻿using DailyNotesChart.Application.Abstractions.Persistance;
 using MediatR;
 
 namespace DailyNotesChart.Application.Behaviors;
 
-public sealed class UnitOfWorkBehaior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
+public sealed class UnitOfWorkBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public UnitOfWorkBehaior(IUnitOfWork unitOfWork)
+    public UnitOfWorkBehavior(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }

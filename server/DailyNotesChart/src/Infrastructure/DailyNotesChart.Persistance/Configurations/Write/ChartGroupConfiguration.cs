@@ -1,10 +1,11 @@
 ﻿using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
+using DailyNotesChart.Persistance.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Text.Json;
 
-namespace DailyNotesChart.Persistance.Configurations;
+namespace DailyNotesChart.Persistance.Configurations.Write;
 
 internal sealed class ChartGroupConfiguration : IEntityTypeConfiguration<ChartGroup>
 {
@@ -25,8 +26,14 @@ internal sealed class ChartGroupConfiguration : IEntityTypeConfiguration<ChartGr
 
         builder.Property(cg => cg.DefaultChartTemplate)
             .HasConversion(
-                value => JsonSerializer.Serialize(value, (JsonSerializerOptions?)null),
-                value => JsonSerializer.Deserialize<DefaultChartTemplate>(value, (JsonSerializerOptions?)null)!
+                value => JsonSerializer.Serialize(value, new JsonSerializerOptions
+                {
+                    Converters = {new DefaultChartTemplateConverter()}
+                }),
+                value => JsonSerializer.Deserialize<DefaultChartTemplate>(value, new JsonSerializerOptions
+                {
+                    Converters = {new DefaultChartTemplateConverter() }
+                })!
             );
 
         //builder.OwnsOne(cg => cg.DefaultChartTemplate, ownedNavigationBuilder =>

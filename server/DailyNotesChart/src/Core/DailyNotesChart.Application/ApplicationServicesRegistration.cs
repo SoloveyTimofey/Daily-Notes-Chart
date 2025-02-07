@@ -7,13 +7,13 @@ namespace DailyNotesChart.Application;
 
 public static class ApplicationServicesRegistration
 {
-    public static IServiceCollection AddApplicatiomServices(this IServiceCollection services)
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
 
-            config.AddOpenBehavior(typeof(UnitOfWorkBehaior<,>));
+            config.AddOpenBehavior(typeof(UnitOfWorkBehavior<,>));
         });
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

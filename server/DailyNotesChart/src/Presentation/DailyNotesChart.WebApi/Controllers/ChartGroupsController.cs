@@ -9,7 +9,7 @@ namespace DailyNotesChart.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ChartGroupsController : ControllerBase
+public class ChartGroupsController : ApplicationBaseController
 {
     private readonly ISender _sender;
     private readonly IMapper _mapper;
@@ -19,32 +19,22 @@ public class ChartGroupsController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpPost] // TODO: refactor
+    [HttpPost]
     public async Task<IActionResult> Create(CreateChartGroupCommand command)
     {
         var result = await _sender.Send(command);
 
-        if (result.IsSuccess)
-        {
-            return Ok(result.Value!.Id);
-        }
-
-        return BadRequest(result.Error);
+        return GetActionResult(result);
     }
 
-    [HttpPatch, Route(nameof(SetDefaultNoteTemplate))]
+    [HttpPatch(nameof(SetDefaultNoteTemplate))]
     public async Task<IActionResult> SetDefaultNoteTemplate(SetDefaultNoteTemplateRequest request)
     {
         var command = _mapper.Map<SetDefaultNoteTemplateCommand>(request);
 
         var result = await _sender.Send(command);
 
-        if (result.IsSuccess)
-        {
-            return Ok();
-        }
-
-        return BadRequest(result.Error);
+        return GetActionResult(result);
     }
 
     [HttpGet]
@@ -54,11 +44,6 @@ public class ChartGroupsController : ControllerBase
 
         var result = await _sender.Send(query);
 
-        if (result.IsSuccess)
-        {
-            return Ok(result.Value);
-        }
-
-        return BadRequest(result.Error);
+        return GetActionResult(result);
     }
 }

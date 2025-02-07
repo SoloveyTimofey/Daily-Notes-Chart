@@ -33,8 +33,8 @@ public sealed class TwoDimentionalChart : ChartBase
     {
     }
     #pragma warning enable
-
-    public static Result<TwoDimentionalChart> CreateEF(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
+    // Method for EF Core
+    private static Result<TwoDimentionalChart> CreateEFCore(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
         Result.Success(
             new TwoDimentionalChart(
                 id: new ChartId(Guid.NewGuid()),
@@ -52,7 +52,7 @@ public sealed class TwoDimentionalChart : ChartBase
     public YAxeValues YAxeValues { get; private set; }
     public YAxeName YAxeName { get; private set; }
 
-    public static Result<TwoDimentionalChart> Create(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
+    internal static Result<TwoDimentionalChart> Create(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
         Result.Success(
             new TwoDimentionalChart(
                 id: new ChartId(Guid.NewGuid()),

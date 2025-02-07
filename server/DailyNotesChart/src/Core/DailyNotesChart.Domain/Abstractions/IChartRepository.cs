@@ -5,4 +5,5 @@ namespace DailyNotesChart.Domain.Abstractions;
 
 public interface IChartRepository : ICrudRepository<ChartBase, ChartId>
 {
+
 }

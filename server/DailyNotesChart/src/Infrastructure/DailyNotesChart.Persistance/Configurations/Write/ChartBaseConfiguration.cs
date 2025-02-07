@@ -3,7 +3,7 @@ using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObject
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DailyNotesChart.Persistance.Configurations;
+namespace DailyNotesChart.Persistance.Configurations.Write;
 
 internal sealed class ChartBaseConfiguration : IEntityTypeConfiguration<ChartBase>
 {
@@ -28,7 +28,9 @@ internal sealed class ChartBaseConfiguration : IEntityTypeConfiguration<ChartBas
             .HasConversion(
                 summary => summary.Value,
                 value => ChartSummary.Create(value).Value!
-            ).HasMaxLength(ChartSummary.SUMMARY_MAX_LENGHT);
+            )
+            .HasMaxLength(ChartSummary.SUMMARY_MAX_LENGHT)
+            .IsRequired(false);
 
         // Note: need to check after the mapping strategy will be resolved
         //builder.OwnsMany(c => c.Notes, nb =>

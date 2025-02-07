@@ -8,7 +8,7 @@ namespace DailyNotesChart.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class NoteTemplatesController : ControllerBase
+public class NoteTemplatesController : ApplicationBaseController
 {
     private readonly ISender _sender;
     private readonly IMapper _mapper;
@@ -26,11 +26,6 @@ public class NoteTemplatesController : ControllerBase
 
         var result = await _sender.Send(command);
 
-        if (result.IsSuccess)
-        {
-            return Ok(result.Value!.Id.Id);
-        }
-
-        return BadRequest(result.Error);
+        return GetActionResult(result);
     }
 }

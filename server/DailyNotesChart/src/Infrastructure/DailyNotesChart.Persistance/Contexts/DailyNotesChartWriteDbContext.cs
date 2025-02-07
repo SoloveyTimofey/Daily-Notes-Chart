@@ -5,11 +5,11 @@ using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace DailyNotesChart.Persistance.Context;
+namespace DailyNotesChart.Persistance.Contexts;
 
-public sealed class DailyNotesChartDbContext : DbContext
+public sealed class DailyNotesChartWriteDbContext : DbContext
 {
-    public DailyNotesChartDbContext(DbContextOptions<DailyNotesChartDbContext> options) : base(options) { }
+    public DailyNotesChartWriteDbContext(DbContextOptions<DailyNotesChartWriteDbContext> options) : base(options) { }
 
     public DbSet<ChartGroup> ChartGroups { get; set; }
     public DbSet<ChartBase> Charts { get; set; }
@@ -22,6 +22,11 @@ public sealed class DailyNotesChartDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        modelBuilder.ApplyConfigurationsFromAssembly(
+            Assembly.GetExecutingAssembly(),
+            WriteConfigurationsFilter);
     }
+
+    private static bool WriteConfigurationsFilter(Type type) =>
+        type?.FullName?.Contains("Configurations.Write") ?? false;
 }

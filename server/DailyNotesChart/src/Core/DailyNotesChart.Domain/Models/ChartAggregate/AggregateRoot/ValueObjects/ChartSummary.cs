@@ -12,12 +12,17 @@ public sealed class ChartSummary : ValueObject
     #pragma warning disable
     private ChartSummary() { }
     #pragma warning enable
-    private ChartSummary(string summary) => Value = summary;
+    private ChartSummary(string? summary) => Value = summary;
 
-    public string Value { get; }
+    public string? Value { get; }
 
-    public static Result<ChartSummary> Create(string summary)
+    public static Result<ChartSummary> Create(string? summary)
     {
+        if (summary is null)
+        {
+            return Result.Success(new ChartSummary(summary));
+        }
+
         if (summary.Length < SUMMARY_MIN_LENGHT || summary.Length > SUMMARY_MAX_LENGHT)
         {
             return Result.Failure<ChartSummary>(DomainErrors.Chart.InvalidChartSummary);

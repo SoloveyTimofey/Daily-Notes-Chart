@@ -1,4 +1,4 @@
-﻿using DailyNotesChart.Persistance.Context;
+﻿using DailyNotesChart.Persistance.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace DailyNotesChart.WebApi.Extensions;
@@ -9,7 +9,7 @@ public static class MigrationExtensions
     {
         using var scope = app.Services.CreateScope();
 
-        var dbContext = scope.ServiceProvider.GetRequiredService<DailyNotesChartDbContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<DailyNotesChartWriteDbContext>();
 
         dbContext.Database.Migrate();
     }

@@ -1,5 +1,6 @@
 using DailyNotesChart.Application;
 using DailyNotesChart.Persistance;
+using DailyNotesChart.Domain;
 using DailyNotesChart.WebApi.Extensions;
 using System.Reflection;
 
@@ -13,7 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-    .AddApplicatiomServices()
+    .AddDomainServices()
+    .AddApplicationServices()
     .AddPersistanceServices(builder.Configuration);
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

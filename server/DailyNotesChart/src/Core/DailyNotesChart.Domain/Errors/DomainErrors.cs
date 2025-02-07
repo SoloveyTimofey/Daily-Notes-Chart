@@ -40,6 +40,10 @@ public static class DomainErrors
             "Chart.ValuesOutOfRange",
             $"Start or end values are out of range. Start value cannot be greater than {YAxeValues.MIN_VALUE} and end value cannot be greater than {YAxeValues.MAX_VALUE}.");
 
+        public static readonly Error ValuesAreEqual = new Error(
+            "Chart.ValuesAreEqual",
+            $"Values are out of equal. Provide different values.");
+
         public static readonly Error InvalidYAxeName = new Error(
             "Chart.InvalidYAxeName",
             $"Invalid y axe name. Name lenght of y axe must be between {YAxeName.NAME_MIN_LENGHT} and {YAxeName.NAME_MAX_LENGHT}.");

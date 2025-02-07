@@ -3,7 +3,7 @@ using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DailyNotesChart.Persistance.Configurations;
+namespace DailyNotesChart.Persistance.Configurations.Write;
 
 internal sealed class NoteTemplateConfiguration : IEntityTypeConfiguration<NoteTemplate>
 {

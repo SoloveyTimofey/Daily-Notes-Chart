@@ -2,5 +2,5 @@
 
 public class EntityWithSpecifiedIdDoesNotExistException : ApplicationException
 {
-    public EntityWithSpecifiedIdDoesNotExistException(string entityName, string id) : base($"Entity {entityName} with ID {id} does not exist") { }
+    public EntityWithSpecifiedIdDoesNotExistException(string entityName, string providedId) : base($"Entity {entityName} with ID {providedId} does not exist") { }
 }

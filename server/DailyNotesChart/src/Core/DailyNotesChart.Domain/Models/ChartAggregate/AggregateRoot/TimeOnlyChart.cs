@@ -16,7 +16,7 @@ public sealed class TimeOnlyChart : ChartBase
     {
     }
 
-    public static Result<TimeOnlyChart> Create(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId) =>
+    internal static Result<TimeOnlyChart> Create(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId) =>
         Result.Success(
             new TimeOnlyChart(
                 id: new ChartId(Guid.NewGuid()),

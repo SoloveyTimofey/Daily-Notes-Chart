@@ -6,5 +6,6 @@ public interface ICrudRepository<TEntity, TEntityId>
     Task<bool> DoesEntityWithSpecifiedIdExistAsync(TEntityId id);
     void Update(TEntity entity);
     void Create(TEntity entity);
+    Task CreateAsync(TEntity entity);
     void Delete(TEntityId entityId);
 }

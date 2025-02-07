@@ -33,6 +33,11 @@ public class YAxeValues : ValueObject
             return Result.Failure<YAxeValues>(DomainErrors.Chart.ValuesOutOfRange);
         }
 
+        if (start == end)
+        {
+            return Result.Failure<YAxeValues>(DomainErrors.Chart.ValuesAreEqual);
+        }
+
         if (isInteger is true)
         {
             start = (int)start;

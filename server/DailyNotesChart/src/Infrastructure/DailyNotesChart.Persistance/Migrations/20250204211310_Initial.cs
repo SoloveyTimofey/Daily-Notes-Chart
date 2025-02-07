@@ -36,6 +36,7 @@ namespace DailyNotesChart.Persistance.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
                     YAxeValues_Start = table.Column<double>(type: "float", maxLength: 10000, nullable: true),
                     YAxeValues_End = table.Column<double>(type: "float", maxLength: 10000, nullable: true),
+                    YAxevalues_Integer = table.Column<bool>(type: "bit", nullable: true),
                     YAxeName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true)
                 },
                 constraints: table =>

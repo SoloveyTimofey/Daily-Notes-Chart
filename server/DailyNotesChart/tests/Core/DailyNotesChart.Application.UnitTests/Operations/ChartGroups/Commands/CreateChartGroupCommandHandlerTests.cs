@@ -13,7 +13,6 @@ namespace DailyNotesChart.Application.UnitTests.Operations.ChartGroups.Commands;
 public sealed class CreateChartGroupCommandHandlerTests
 {
     private IChartGroupRepository _chartGroupRepository;
-    private INoteTemplateRepository _noteTemplateRepository;
     private IUnitOfWork _unitOfWork;
     private readonly string _validName = "My Daily Efficiency";
 
@@ -21,7 +20,6 @@ public sealed class CreateChartGroupCommandHandlerTests
     public void SetUp()
     {
         _chartGroupRepository = Substitute.For<IChartGroupRepository>();
-        _noteTemplateRepository = Substitute.For<INoteTemplateRepository>();
         _unitOfWork = Substitute.For<IUnitOfWork>();
     }
 
@@ -33,7 +31,7 @@ public sealed class CreateChartGroupCommandHandlerTests
 
         var command = new CreateChartGroupCommand(tooLongName);
 
-        var handler = new CreateChartGroupCommandHandler(_chartGroupRepository, _noteTemplateRepository, _unitOfWork);
+        var handler = new CreateChartGroupCommandHandler(_chartGroupRepository, _unitOfWork);
 
         // Act
         var result = await handler.Handle(command, default);
@@ -50,7 +48,7 @@ public sealed class CreateChartGroupCommandHandlerTests
 
         var command = new CreateChartGroupCommand(tooShortName);
 
-        var handler = new CreateChartGroupCommandHandler(_chartGroupRepository, _noteTemplateRepository, _unitOfWork);
+        var handler = new CreateChartGroupCommandHandler(_chartGroupRepository, _unitOfWork);
 
         // Act
         var result = await handler.Handle(command, default);
@@ -65,7 +63,7 @@ public sealed class CreateChartGroupCommandHandlerTests
         // Arrange
         var command = new CreateChartGroupCommand(_validName);
 
-        var handler = new CreateChartGroupCommandHandler(_chartGroupRepository, _noteTemplateRepository, _unitOfWork);
+        var handler = new CreateChartGroupCommandHandler(_chartGroupRepository, _unitOfWork);
 
         // Act
         var result = await handler.Handle(command, default);
@@ -78,7 +76,7 @@ public sealed class CreateChartGroupCommandHandlerTests
     public async Task Handle_PassInvalidDefaultChartTemplate_ReturnsError()
     {
         // Arrange
-        var invalidDefaultChartTemplate = new CreateDefaultChartTemplateDto(
+        var invalidDefaultChartTemplate = new DTOs.ChartGroups.CreateDefaultChartTemplateDto(
             YAxeName: "Some yAxeName",
             Start: 20,
             End: 10,
@@ -87,7 +85,7 @@ public sealed class CreateChartGroupCommandHandlerTests
 
         var command = new CreateChartGroupCommand(_validName, invalidDefaultChartTemplate);
 
-        var handler = new CreateChartGroupCommandHandler(_chartGroupRepository, _noteTemplateRepository, _unitOfWork);
+        var handler = new CreateChartGroupCommandHandler(_chartGroupRepository, _unitOfWork);
 
         // Act
         var result = await handler.Handle(command, default);
@@ -100,14 +98,14 @@ public sealed class CreateChartGroupCommandHandlerTests
     public async Task Handle_PassInvalidDefaultNoteTemplateTemplate_ReturnsError()
     {
         // Arrange
-        var invalidDefaultNoteTemplate = new CreateNoteTemplateDto(
+        var invalidDefaultNoteTemplate = new DTOs.ChartGroups.CreateNoteTemplateDto(
             Color: "Invalid Color",
             NoteDescription: "My Note"
         );
 
         var command = new CreateChartGroupCommand(_validName, null, invalidDefaultNoteTemplate);
 
-        var handler = new CreateChartGroupCommandHandler(_chartGroupRepository, _noteTemplateRepository, _unitOfWork);
+        var handler = new CreateChartGroupCommandHandler(_chartGroupRepository, _unitOfWork);
 
         // Act
         var result = await handler.Handle(command, default);
@@ -120,7 +118,7 @@ public sealed class CreateChartGroupCommandHandlerTests
     public async Task Handle_PassValidParameters_ReturnsExceptedResult()
     {
         // Arrange
-        var validChartTemplate = new CreateDefaultChartTemplateDto
+        var validChartTemplate = new DTOs.ChartGroups.CreateDefaultChartTemplateDto
         (
             YAxeName: "Values",
             Start: 0,
@@ -128,7 +126,7 @@ public sealed class CreateChartGroupCommandHandlerTests
             IsInteger: true
         );
 
-        var validNoteTemplate = new CreateNoteTemplateDto
+        var validNoteTemplate = new DTOs.ChartGroups.CreateNoteTemplateDto
         (
             Color: "#FFFFFF",
             NoteDescription: "Woke up"
@@ -136,7 +134,7 @@ public sealed class CreateChartGroupCommandHandlerTests
 
         var command = new CreateChartGroupCommand(_validName, validChartTemplate, validNoteTemplate);
 
-        var handler = new CreateChartGroupCommandHandler( _chartGroupRepository, _noteTemplateRepository, _unitOfWork);
+        var handler = new CreateChartGroupCommandHandler( _chartGroupRepository, _unitOfWork);
 
         // Act
         var result = await handler.Handle(command, default);

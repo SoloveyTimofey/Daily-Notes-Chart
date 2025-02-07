@@ -3,7 +3,7 @@ using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObject
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DailyNotesChart.Persistance.Configurations;
+namespace DailyNotesChart.Persistance.Configurations.Write;
 
 public sealed class TwoDimensionalChartConfiguration : IEntityTypeConfiguration<TwoDimentionalChart>
 {
@@ -13,6 +13,9 @@ public sealed class TwoDimensionalChartConfiguration : IEntityTypeConfiguration<
         {
             yAxeValuesBuilder.Property(yAxeVal => yAxeVal.Start).HasMaxLength(YAxeValues.MAX_VALUE);
             yAxeValuesBuilder.Property(yAxeVal => yAxeVal.End).HasMaxLength(YAxeValues.MAX_VALUE);
+            yAxeValuesBuilder.Property(yAxeVal => yAxeVal.IsInteger).HasColumnType("bit");
+            yAxeValuesBuilder.Property(yAxeVal => yAxeVal.IsInteger).HasColumnName("YAxevalues_IsInteger");
+            yAxeValuesBuilder.Property(yAxeVal => yAxeVal.IsInteger);
         });
 
         builder.Property(c => c.YAxeName)

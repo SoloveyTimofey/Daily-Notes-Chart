@@ -1,14 +1,14 @@
 ﻿using DailyNotesChart.Application.Abstractions.Persistance;
 using DailyNotesChart.Domain.Abstractions;
-using DailyNotesChart.Persistance.Context;
+using DailyNotesChart.Persistance.Contexts;
 
 namespace DailyNotesChart.Persistance.Repositories;
 
 internal sealed class UnitOfWork : IUnitOfWork
 {
-    private readonly DailyNotesChartDbContext _context;
+    private readonly DailyNotesChartWriteDbContext _context;
 
-    public UnitOfWork(DailyNotesChartDbContext context)
+    public UnitOfWork(DailyNotesChartWriteDbContext context)
     {
         _context = context;
     }

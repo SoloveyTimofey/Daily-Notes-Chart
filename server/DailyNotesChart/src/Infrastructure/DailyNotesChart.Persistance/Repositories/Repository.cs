@@ -1,8 +1,6 @@
 ﻿using DailyNotesChart.Domain.Primitives;
-using DailyNotesChart.Persistance.Context;
+using DailyNotesChart.Persistance.Contexts;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
 namespace DailyNotesChart.Persistance.Repositories;
 
@@ -10,17 +8,15 @@ internal abstract class Repository<TEntity, TEntityId>
     where TEntity : Entity<TEntityId> 
     where TEntityId : class
 {
-    protected readonly DailyNotesChartDbContext Context;
+    protected readonly DailyNotesChartWriteDbContext Context;
 
-    protected Repository(DailyNotesChartDbContext context)
+    protected Repository(DailyNotesChartWriteDbContext context)
     {
         Context = context;
     }
 
     public virtual Task<TEntity?> GetByIdAsync(TEntityId id)
     {
-        //return Context.Set<TEntity>().SingleOrDefaultAsync(entity => entity.Id == id);
-
         return GetByIdAsync<TEntity, TEntityId>(id);
     }
 
@@ -31,19 +27,21 @@ internal abstract class Repository<TEntity, TEntityId>
 
     public virtual void Create(TEntity entity)
     {
-        //Context.Set<TEntity>().Add(entity);
         Create<TEntity, TEntityId>(entity);
+    }
+
+    public virtual Task CreateAsync(TEntity entity)
+    {
+        return CreateAsync<TEntity, TEntityId>(entity);
     }
 
     public virtual void Update(TEntity entity)
     {
-        //Context.Set<TEntity>().Update(entity);
         Update<TEntity, TEntityId>(entity);
     }
 
     public virtual void Delete(TEntityId entityid)
     {
-        //Context.Set<TEntity>().Remove(entity);
         Delete<TEntity, TEntityId>(entityid);
     }
 
@@ -52,6 +50,13 @@ internal abstract class Repository<TEntity, TEntityId>
         where TAnotherEntityId : class
     {
         Context.Set<TAnotherEntity>().Add(entity);
+    }
+
+    protected async Task CreateAsync<TAnotherEntity, TAnotherEntityId>(TAnotherEntity entity)
+        where TAnotherEntity : Entity<TAnotherEntityId>
+        where TAnotherEntityId : class
+    {
+        await Context.Set<TAnotherEntity>().AddAsync(entity);
     }
 
     protected void Update<TAnotherEntity, TAnotherEntityId>(TAnotherEntity entity)
@@ -75,11 +80,4 @@ internal abstract class Repository<TEntity, TEntityId>
     {
         return Context.Set<TAnotherEntity>().SingleOrDefaultAsync(entity => entity.Id == id);
     }
-
-    //protected IQueryable<TAnotherEntity> GetAllEntities<TAnotherEntity, TAnotherEntityId>()
-    //    where TAnotherEntity : Entity<TAnotherEntityId>
-    //    where TAnotherEntityId : class
-    //{
-    //    return Context.Set<TAnotherEntity>().AsQueryable();
-    //}
 }
