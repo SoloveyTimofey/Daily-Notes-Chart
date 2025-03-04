@@ -6,7 +6,7 @@ using DailyNotesChart.Domain.Shared;
 
 namespace DailyNotesChart.Application.Operations.ChartGroups.Queries;
 
-public sealed class GetAllChartGroupsQueryHandler : IQueryHandler<GetAllChartGroupsQuery, List<ChartGroupReadDto>>
+internal sealed class GetAllChartGroupsQueryHandler : IQueryHandler<GetAllChartGroupsQuery, List<ChartGroupReadDto>>
 {
     private readonly IReadOnlyRepository _repository;
 

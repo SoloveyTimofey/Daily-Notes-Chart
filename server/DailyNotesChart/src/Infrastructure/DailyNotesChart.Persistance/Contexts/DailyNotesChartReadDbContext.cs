@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace DailyNotesChart.Persistance.Contexts;
 
-public sealed class DailyNotesChartReadDbContext : DbContext
+internal sealed class DailyNotesChartReadDbContext : DbContext
 {
     public DailyNotesChartReadDbContext(DbContextOptions<DailyNotesChartReadDbContext> options) : base(options) { }
 

@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\DailyNotesChart.Application\DailyNotesChart.Application.csproj" />
     <ProjectReference Include="..\..\Core\DailyNotesChart.Domain\DailyNotesChart.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\DailyNotesChart.Infrastructure\DailyNotesChart.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\DailyNotesChart.Persistance\DailyNotesChart.Persistance.csproj" />
   </ItemGroup>
 

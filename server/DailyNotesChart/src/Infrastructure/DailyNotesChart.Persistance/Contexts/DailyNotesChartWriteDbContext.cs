@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace DailyNotesChart.Persistance.Contexts;
 
-public sealed class DailyNotesChartWriteDbContext : DbContext
+internal sealed class DailyNotesChartWriteDbContext : DbContext
 {
     public DailyNotesChartWriteDbContext(DbContextOptions<DailyNotesChartWriteDbContext> options) : base(options) { }
 

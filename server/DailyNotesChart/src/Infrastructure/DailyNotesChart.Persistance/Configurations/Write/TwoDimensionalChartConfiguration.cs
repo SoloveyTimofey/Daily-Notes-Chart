@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DailyNotesChart.Persistance.Configurations.Write;
 
-public sealed class TwoDimensionalChartConfiguration : IEntityTypeConfiguration<TwoDimentionalChart>
+internal sealed class TwoDimensionalChartConfiguration : IEntityTypeConfiguration<TwoDimentionalChart>
 {
     public void Configure(EntityTypeBuilder<TwoDimentionalChart> builder)
     {

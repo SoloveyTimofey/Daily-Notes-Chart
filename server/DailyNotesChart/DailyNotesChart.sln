@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyNotesChart.Infrastruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyNotesChart.Application.UnitTests", "tests\Core\DailyNotesChart.Application.UnitTests\DailyNotesChart.Application.UnitTests.csproj", "{585107FF-52B6-48CA-9E37-63788D1C21CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "minitest", "minitest\minitest.csproj", "{3C00E158-7B66-446D-82C7-2D04FC39F6A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "minitest", "minitest\minitest.csproj", "{3C00E158-7B66-446D-82C7-2D04FC39F6A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Architecture.Tests", "tests\Architecture.Tests\Architecture.Tests.csproj", "{DEDDC2D1-2348-4323-A79B-D9FCB4347F59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{3C00E158-7B66-446D-82C7-2D04FC39F6A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C00E158-7B66-446D-82C7-2D04FC39F6A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C00E158-7B66-446D-82C7-2D04FC39F6A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEDDC2D1-2348-4323-A79B-D9FCB4347F59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEDDC2D1-2348-4323-A79B-D9FCB4347F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEDDC2D1-2348-4323-A79B-D9FCB4347F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEDDC2D1-2348-4323-A79B-D9FCB4347F59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{D8AF5C3A-ACA5-4DA7-A00E-57E7999CFABA} = {FD44A519-AD95-445B-8C70-4D16AAAFE8C1}
 		{808FFAA2-EAED-43CF-ADC4-F4EE108945A9} = {83F0EC7D-0BAC-4244-B841-B032FF0B3F01}
 		{585107FF-52B6-48CA-9E37-63788D1C21CC} = {FD44A519-AD95-445B-8C70-4D16AAAFE8C1}
+		{DEDDC2D1-2348-4323-A79B-D9FCB4347F59} = {20FBB65B-45C8-4758-B482-2080ED84DE06}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {13FD728E-12AA-4D2C-BBC5-7FEEA34A410E}

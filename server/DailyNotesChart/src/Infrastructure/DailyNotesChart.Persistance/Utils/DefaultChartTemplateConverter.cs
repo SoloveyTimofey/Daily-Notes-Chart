@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace DailyNotesChart.Persistance.Utils;
 
-public class DefaultChartTemplateConverter : JsonConverter<DefaultChartTemplate>
+internal class DefaultChartTemplateConverter : JsonConverter<DefaultChartTemplate>
 {
     public override DefaultChartTemplate? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

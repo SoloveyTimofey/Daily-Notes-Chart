@@ -7,7 +7,7 @@ using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
 
 namespace DailyNotesChart.Application.Operations.ChartGroups.Commands;
 
-public sealed class SetDefaultNoteTemplateCommandHandler : CommandHandlerBase<Result>, ICommandHandler<SetDefaultNoteTemplateCommand>
+internal sealed class SetDefaultNoteTemplateCommandHandler : CommandHandlerBase<Result>, ICommandHandler<SetDefaultNoteTemplateCommand>
 {
     private readonly IChartGroupRepository _chartGroupRepository;
 
@@ -24,7 +24,6 @@ public sealed class SetDefaultNoteTemplateCommandHandler : CommandHandlerBase<Re
             throw new EntityWithSpecifiedIdDoesNotExistException(nameof(ChartGroup), request.ChartGroupId.Id.ToString());
 
         NoteTemplate? noteTemplate = await _chartGroupRepository.GetNoteTemplateByIdAsync(request.NoteTemplateId);
-
         if(noteTemplate is null)
             throw new EntityWithSpecifiedIdDoesNotExistException(nameof(NoteTemplate), request.NoteTemplateId.Id.ToString());
 
