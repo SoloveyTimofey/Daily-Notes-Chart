@@ -2,14 +2,14 @@
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
-using DailyNotesChart.Domain.Shared;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 
 public sealed class TimeOnlyNote : NoteBase
 {
     #pragma warning disable
-    private TimeOnlyNote() { }
+    private TimeOnlyNote() { } // EF Core constructor
     #pragma warning enable
     private TimeOnlyNote(
         ChartId chartId,

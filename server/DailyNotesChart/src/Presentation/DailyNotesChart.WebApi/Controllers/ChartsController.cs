@@ -3,7 +3,6 @@ using DailyNotesChart.Application.Operations.Charts.Commands;
 using DailyNotesChart.Application.Operations.Charts.Queries;
 using DailyNotesChart.WebApi.Requests.Charts;
 using MediatR;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DailyNotesChart.WebApi.Controllers;

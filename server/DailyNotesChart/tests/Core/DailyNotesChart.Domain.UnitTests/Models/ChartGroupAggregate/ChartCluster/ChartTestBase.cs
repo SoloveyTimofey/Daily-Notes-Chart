@@ -15,7 +15,7 @@ public abstract class ChartTestBase
 
     protected TwoDimentionalChart CreateTwoDimensionalChart() =>
         TwoDimentionalChart.Create(
-            Arg.Any<ChartSummary?>(),
+            Arg.Any<ChartSummary>(),
             Arg.Any<ChartDate>(),
             Arg.Any<ChartGroupId>(),
             YAxeValues.Create(0, 10, true).Value!,

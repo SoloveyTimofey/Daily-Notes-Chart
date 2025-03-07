@@ -15,7 +15,7 @@ public sealed class ChartSummaryTests
         var result = ChartSummary.Create(tooLongSummary);
 
         // Assert
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.InvalidChartSummary));
+        Assert.Contains(DomainErrors.Chart.InvalidChartSummary, result.Errors.ToList());
     }
 
     [Test]

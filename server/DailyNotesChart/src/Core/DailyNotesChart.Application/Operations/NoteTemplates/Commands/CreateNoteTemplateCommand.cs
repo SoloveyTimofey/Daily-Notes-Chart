@@ -10,4 +10,4 @@ public sealed record CreateNoteTemplateCommand(
     ChartGroupId ChartGroupId,
     string Color,
     string NoteDescription
-) : ICommand<Guid>;
+) : ICommand<NoteTemplateId>;

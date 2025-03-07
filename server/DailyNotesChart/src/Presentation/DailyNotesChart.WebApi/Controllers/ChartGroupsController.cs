@@ -1,13 +1,19 @@
 ﻿using AutoMapper;
 using DailyNotesChart.Application.Operations.ChartGroups.Commands;
 using DailyNotesChart.Application.Operations.ChartGroups.Queries;
+using DailyNotesChart.Application.Shared;
+using DailyNotesChart.WebApi.Consts;
 using DailyNotesChart.WebApi.Requests.ChartGroups;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Security.Claims;
 
 namespace DailyNotesChart.WebApi.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class ChartGroupsController : ApplicationBaseController
 {
@@ -22,6 +28,12 @@ public class ChartGroupsController : ApplicationBaseController
     [HttpPost]
     public async Task<IActionResult> Create(CreateChartGroupCommand command)
     {
+        var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (command.CreatorId.ToString() != userId)
+        {
+            return StatusCode(StatusCodes.Status403Forbidden, ConstStrings.ResponseMessages.YouDontHavePermissionToPerformThisAction);
+        }
+
         var result = await _sender.Send(command);
 
         return GetActionResult(result);

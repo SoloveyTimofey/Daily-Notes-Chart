@@ -31,7 +31,7 @@ public sealed class TwoDimensionalChartTests : ChartTestBase
 
         // Assert
         Assert.That(result.IsFailure);
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.CannotAddNoteWithDuplicateCoordinates));
+        Assert.Contains(DomainErrors.Chart.CannotAddNoteWithDuplicateCoordinates, result.Errors.ToList());
     }
 
     [Test]
@@ -39,7 +39,7 @@ public sealed class TwoDimensionalChartTests : ChartTestBase
     {
         // Assign 
         var timeOnlyChart = TimeOnlyChart.Create(
-            Arg.Any<ChartSummary?>(),
+            Arg.Any<ChartSummary>(),
             Arg.Any<ChartDate>(),
             Arg.Any<ChartGroupId>()
         ).Value!;

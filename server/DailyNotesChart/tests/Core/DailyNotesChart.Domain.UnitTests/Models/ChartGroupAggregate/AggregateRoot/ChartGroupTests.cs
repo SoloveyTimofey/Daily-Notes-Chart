@@ -3,7 +3,6 @@ using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.Exceptions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
-using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
 
@@ -25,6 +24,7 @@ public sealed class ChartGroupTest
 
         var createChartGroupResult = ChartGroup.Create(
             chartGroupName!,
+            Arg.Any<ApplicationUserId>(),
             defaultChartTemplate!
         );
 
@@ -50,7 +50,7 @@ public sealed class ChartGroupTest
         Assert.That(firstAddingResult.IsSuccess);
 
         Assert.That(secondAddingResult.IsFailure);
-        Assert.That(secondAddingResult.Error, Is.EqualTo(DomainErrors.ChartGroup.CannotAddChartWithExistingDateInChartGroup));
+        Assert.Contains(DomainErrors.ChartGroup.CannotAddChartWithExistingDateInChartGroup, secondAddingResult.Errors.ToList());
     }
 
     [Test, Category("AddChart")]

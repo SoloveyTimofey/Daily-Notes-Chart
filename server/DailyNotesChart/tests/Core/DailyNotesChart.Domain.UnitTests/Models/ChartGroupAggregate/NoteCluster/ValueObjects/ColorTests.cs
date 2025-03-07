@@ -15,7 +15,7 @@ public sealed class ColorTests
         var result = Color.Create(invalidColor);
 
         // Assert
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.NoteTemplate.InvalidColorFormat));
+        Assert.Contains(DomainErrors.NoteTemplate.InvalidColorFormat, result.Errors.ToList());
     }
     [Test]
     public void Create_PassValidColorColorFormat_ReturnsResultSuccess()

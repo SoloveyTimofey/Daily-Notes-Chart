@@ -15,7 +15,7 @@ public sealed class ChartDateTests
         var result = ChartDate.Create(tooEarlyDate);
 
         // Assert
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.InvaildChartDate));
+        Assert.Contains(DomainErrors.Chart.InvalidChartDate, result.Errors.ToList());
     }
 
     [Test]
@@ -28,6 +28,6 @@ public sealed class ChartDateTests
         var result = ChartDate.Create(tooLateDate);
 
         // Assert
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.InvaildChartDate));
+        Assert.Contains(DomainErrors.Chart.InvalidChartDate, result.Errors.ToList());
     }
 }

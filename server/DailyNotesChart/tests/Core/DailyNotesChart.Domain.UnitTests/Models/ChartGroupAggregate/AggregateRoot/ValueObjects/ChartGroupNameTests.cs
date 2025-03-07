@@ -16,7 +16,7 @@ public sealed class ChartGroupNameTests
         var result = ChartGroupName.Create(tooShortName);
 
         // Assert
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.ChartGroup.InvalidChartGroupName));
+        Assert.Contains(DomainErrors.ChartGroup.InvalidChartGroupName, result.Errors.ToList());
     }
 
     [Test]
@@ -29,6 +29,6 @@ public sealed class ChartGroupNameTests
         var result = ChartGroupName.Create(tooShortName);
 
         // Assert
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.ChartGroup.InvalidChartGroupName));
+        Assert.Contains(DomainErrors.ChartGroup.InvalidChartGroupName, result.Errors.ToList());
     }
 }

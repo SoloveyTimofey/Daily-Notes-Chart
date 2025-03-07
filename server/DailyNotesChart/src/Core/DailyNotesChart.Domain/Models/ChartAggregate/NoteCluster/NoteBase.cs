@@ -7,7 +7,7 @@ namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 public abstract class NoteBase : ValueObject
 {
     #pragma warning disable
-    protected NoteBase() { }
+    protected NoteBase() { } // EF Core constructor
     #pragma warning enable
     protected NoteBase(
         ChartId chartId,

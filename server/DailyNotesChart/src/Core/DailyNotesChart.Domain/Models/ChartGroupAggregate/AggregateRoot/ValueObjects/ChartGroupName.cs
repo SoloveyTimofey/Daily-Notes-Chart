@@ -1,6 +1,6 @@
 ﻿using DailyNotesChart.Domain.Errors;
 using DailyNotesChart.Domain.Primitives;
-using DailyNotesChart.Domain.Shared;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
 
@@ -10,7 +10,7 @@ public sealed class ChartGroupName : ValueObject
     public const int NAME_MAX_LENGHT = 50;
 
     #pragma warning disable
-    private ChartGroupName() { }
+    private ChartGroupName() { } // EF Core constructor
     #pragma warning enable
     private ChartGroupName(string name) => Value = name;
 

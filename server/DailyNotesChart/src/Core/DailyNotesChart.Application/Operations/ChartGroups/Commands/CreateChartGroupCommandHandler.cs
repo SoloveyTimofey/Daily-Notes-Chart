@@ -1,20 +1,18 @@
 ﻿using DailyNotesChart.Application.Abstractions.MediatrSpecific;
 using DailyNotesChart.Application.Abstractions.Persistance;
 using DailyNotesChart.Application.DTOs.ChartGroups;
-using DailyNotesChart.Application.Operations.NoteTemplates.Commands;
 using DailyNotesChart.Domain.Abstractions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
-using DailyNotesChart.Domain.Shared;
-using MediatR;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Application.Operations.ChartGroups.Commands;
 
 // Base Class
-internal sealed class CreateChartGroupCommandHandler : CommandHandlerBase<ChartGroup>, ICommandHandler<CreateChartGroupCommand, ChartGroup>
+internal sealed class CreateChartGroupCommandHandler : HandlerBase<ChartGroupId>, ICommandHandler<CreateChartGroupCommand, ChartGroupId>
 {
     private readonly IChartGroupRepository _chartGroupRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -25,25 +23,25 @@ internal sealed class CreateChartGroupCommandHandler : CommandHandlerBase<ChartG
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result<ChartGroup>> Handle(CreateChartGroupCommand request, CancellationToken cancellationToken)
+    public async Task<Result<ChartGroupId>> Handle(CreateChartGroupCommand request, CancellationToken cancellationToken)
     {
         var nameResult = ChartGroupName.Create(request.Name);
         if (nameResult.IsFailure)
             return await FailureAsync(nameResult);
 
         Result<ChartGroup> chartGroupResult;
-
+        var creatorId = new ApplicationUserId(request.CreatorId);
         if (request.DefaultChartTemplate is not null)
         {
             var defaultChartTemplateResult = CreateDefaultChartTemplate(request.DefaultChartTemplate);
             if (defaultChartTemplateResult.IsFailure)
                 return await FailureAsync(defaultChartTemplateResult);
 
-            chartGroupResult = ChartGroup.Create(nameResult.Value!, defaultChartTemplateResult.Value);
+            chartGroupResult = ChartGroup.Create(nameResult.Value!, creatorId, defaultChartTemplateResult.Value);
         }
         else
         {
-            chartGroupResult = ChartGroup.Create(nameResult.Value!);
+            chartGroupResult = ChartGroup.Create(nameResult.Value!, creatorId);
         }
 
         if (chartGroupResult.IsFailure) return await FailureAsync(chartGroupResult);
@@ -64,7 +62,7 @@ internal sealed class CreateChartGroupCommandHandler : CommandHandlerBase<ChartG
                 return await FailureAsync(setDefaultNoteTemplateResult);
         }
 
-        return await Task.FromResult(Result.Success(chartGroup));
+        return await Task.FromResult(Result.Success(chartGroup.Id));
     }
 
     private Result<DefaultChartTemplate> CreateDefaultChartTemplate(CreateDefaultChartTemplateDto createParams)

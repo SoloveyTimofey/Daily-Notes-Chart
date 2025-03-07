@@ -1,9 +1,10 @@
-﻿using DailyNotesChart.Domain.Shared;
+﻿using DailyNotesChart.Domain.Shared.ResultPattern;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Any;
 
 namespace DailyNotesChart.WebApi.Controllers;
 
-public class ApplicationBaseController : ControllerBase
+public abstract class ApplicationBaseController : ControllerBase
 {
     protected IActionResult GetActionResult<TReturnValue>(Result<TReturnValue> result)
     {
@@ -12,7 +13,7 @@ public class ApplicationBaseController : ControllerBase
             return Ok(result.Value);
         }
 
-        return BadRequest(result.Error);
+        return BadRequest(result.Errors);
     }
 
     protected IActionResult GetActionResult(Result result)
@@ -22,6 +23,6 @@ public class ApplicationBaseController : ControllerBase
             return Ok();
         }
 
-        return BadRequest(result.Error);
+        return BadRequest(result.Errors);
     }
 }

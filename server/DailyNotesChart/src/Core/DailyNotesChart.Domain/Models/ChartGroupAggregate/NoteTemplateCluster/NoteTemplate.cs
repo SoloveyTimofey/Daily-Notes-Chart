@@ -1,14 +1,14 @@
 ﻿using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects;
 using DailyNotesChart.Domain.Primitives;
-using DailyNotesChart.Domain.Shared;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
 
 public sealed class NoteTemplate : Entity<NoteTemplateId>
 {
     #pragma warning disable
-    private NoteTemplate() { }
+    private NoteTemplate() { } // EF Core constructor
     #pragma warning enable
     private NoteTemplate(
         NoteTemplateId id,

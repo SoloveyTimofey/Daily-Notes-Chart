@@ -19,7 +19,7 @@ public sealed class TwoDimensionalNoteTests
         var yAxeValues = YAxeValues.Create(0, 10, true).Value!;
 
         _chart = TwoDimentionalChart.Create(
-            Arg.Any<ChartSummary?>(),
+            Arg.Any<ChartSummary>(),
             Arg.Any<ChartDate>(),
             Arg.Any<ChartGroupId>(),
             yAxeValues,

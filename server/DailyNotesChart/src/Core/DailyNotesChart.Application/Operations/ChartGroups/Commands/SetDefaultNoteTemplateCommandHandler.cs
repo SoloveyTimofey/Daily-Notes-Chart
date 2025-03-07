@@ -1,13 +1,13 @@
 ﻿using DailyNotesChart.Application.Abstractions.MediatrSpecific;
 using DailyNotesChart.Domain.Abstractions;
-using DailyNotesChart.Domain.Shared;
 using DailyNotesChart.Application.Exceptions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Application.Operations.ChartGroups.Commands;
 
-internal sealed class SetDefaultNoteTemplateCommandHandler : CommandHandlerBase<Result>, ICommandHandler<SetDefaultNoteTemplateCommand>
+internal sealed class SetDefaultNoteTemplateCommandHandler : HandlerBase<Result>, ICommandHandler<SetDefaultNoteTemplateCommand>
 {
     private readonly IChartGroupRepository _chartGroupRepository;
 

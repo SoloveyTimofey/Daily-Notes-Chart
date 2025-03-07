@@ -3,10 +3,9 @@ using DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.Exceptions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
-using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
 using DailyNotesChart.Domain.Primitives;
-using DailyNotesChart.Domain.Shared;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
 
@@ -15,7 +14,7 @@ public sealed class ChartGroup : AggregateRoot<ChartGroupId>
     private List<ChartBase> _charts = new();
     private List<NoteTemplate> _noteTemplates = new();
     #pragma warning disable
-    private ChartGroup() { }
+    private ChartGroup() { } // EF Core constructor
     #pragma warning enable
     private ChartGroup(
         ChartGroupId id,
@@ -23,13 +22,15 @@ public sealed class ChartGroup : AggregateRoot<ChartGroupId>
         List<ChartBase> charts,
         List<NoteTemplate> noteTemplates,
         NoteTemplate? defaultNoteTemplate,
-        DefaultChartTemplate defaultChartTemplate) : base(id)
+        DefaultChartTemplate defaultChartTemplate,
+        ApplicationUserId creatorId) : base(id)
     {
         Name = name;
         _charts = charts;
         _noteTemplates = noteTemplates;
         DefaultNoteTemplate = defaultNoteTemplate;
         DefaultChartTemplate = defaultChartTemplate;
+        CreatorId = creatorId;
     }
 
     public ChartGroupName Name { get; private set; }
@@ -39,10 +40,11 @@ public sealed class ChartGroup : AggregateRoot<ChartGroupId>
 
     public NoteTemplateId? DefaultNoteTemplateId { get; private set; }
     public NoteTemplate? DefaultNoteTemplate { get; private set; }
+    public ApplicationUserId CreatorId { get; }
 
     public DefaultChartTemplate DefaultChartTemplate { get; private set; }
 
-    public static Result<ChartGroup> Create(ChartGroupName name, DefaultChartTemplate? defaultChartTemplate = null)
+    public static Result<ChartGroup> Create(ChartGroupName name, ApplicationUserId creatorId, DefaultChartTemplate? defaultChartTemplate = null)
     {
         if (defaultChartTemplate is null)
         {
@@ -59,7 +61,8 @@ public sealed class ChartGroup : AggregateRoot<ChartGroupId>
                 charts: [],
                 noteTemplates: [],
                 defaultNoteTemplate: null,
-                defaultChartTemplate
+                defaultChartTemplate,
+                creatorId
             )
         );
     }

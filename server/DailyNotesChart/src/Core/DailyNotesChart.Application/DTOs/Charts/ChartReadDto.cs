@@ -1,5 +1,4 @@
-﻿using DailyNotesChart.Application.Abstractions.MediatrSpecific;
-using DailyNotesChart.Application.Enums;
+﻿using DailyNotesChart.Application.Enums;
 using DailyNotesChart.Application.ReadModels;
 
 namespace DailyNotesChart.Application.DTOs.Charts;

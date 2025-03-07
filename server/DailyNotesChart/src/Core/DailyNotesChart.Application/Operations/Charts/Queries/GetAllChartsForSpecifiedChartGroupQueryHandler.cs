@@ -1,7 +1,7 @@
 ﻿using DailyNotesChart.Application.Abstractions.MediatrSpecific;
 using DailyNotesChart.Application.Abstractions.Persistance;
 using DailyNotesChart.Application.DTOs.Charts;
-using DailyNotesChart.Domain.Shared;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 using Microsoft.EntityFrameworkCore;
 
 namespace DailyNotesChart.Application.Operations.Charts.Queries;

@@ -15,7 +15,7 @@ public sealed class YAxeNameTests
         var result = YAxeName.Create(tooShortName);
 
         // Assert
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.InvalidYAxeName));
+        Assert.Contains(DomainErrors.Chart.InvalidYAxeName, result.Errors.ToList());
     }
 
     [Test]
@@ -28,6 +28,6 @@ public sealed class YAxeNameTests
         var result = YAxeName.Create(tooLongName);
 
         // Assert
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.InvalidYAxeName));
+        Assert.Contains(DomainErrors.Chart.InvalidYAxeName, result.Errors.ToList());
     }
 }

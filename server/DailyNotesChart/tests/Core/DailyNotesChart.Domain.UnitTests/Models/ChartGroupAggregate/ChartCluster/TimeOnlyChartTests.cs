@@ -42,7 +42,7 @@ public sealed class TimeOnlyChartTests : ChartTestBase
 
         // Assert
         Assert.That(result.IsFailure);
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.CannotAddNoteWithDuplicateCoordinates));
+        Assert.Contains(DomainErrors.Chart.CannotAddNoteWithDuplicateCoordinates, result.Errors.ToList());
     }
 
     [Test]

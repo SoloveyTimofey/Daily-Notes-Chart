@@ -1,6 +1,6 @@
 ﻿using DailyNotesChart.Domain.Errors;
 using DailyNotesChart.Domain.Primitives;
-using DailyNotesChart.Domain.Shared;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
 
@@ -18,7 +18,7 @@ public sealed class ChartDate : ValueObject
     {
         if (date < MIN_DATE || date > MAX_DATE)
         {
-            return Result.Failure<ChartDate>(DomainErrors.Chart.InvaildChartDate);
+            return Result.Failure<ChartDate>(DomainErrors.Chart.InvalidChartDate);
         }
 
         return Result.Success(new ChartDate(date));

@@ -30,7 +30,7 @@ public sealed class YAxeValuesTests
         var result = YAxeValues.Create(tooSmallValue, YAxeValues.MAX_VALUE, true);
 
         // Assert
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.ValuesOutOfRange));
+        Assert.Contains(DomainErrors.Chart.ValuesOutOfRange, result.Errors.ToList());
     }
 
     [Test]
@@ -43,7 +43,7 @@ public sealed class YAxeValuesTests
         var result = YAxeValues.Create(YAxeValues.MIN_VALUE, tooBigValue, true);
 
         // Assert
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.ValuesOutOfRange));
+        Assert.Contains(DomainErrors.Chart.ValuesOutOfRange, result.Errors.ToList());
     }
 
     [Test]
@@ -57,6 +57,6 @@ public sealed class YAxeValuesTests
         var result = YAxeValues.Create(startValue, endValue, true);
 
         // Assert
-        Assert.That(result.Error, Is.EqualTo(DomainErrors.Chart.StartValueGreaterThanEndValue));
+        Assert.Contains(DomainErrors.Chart.StartValueGreaterThanEndValue, result.Errors.ToList());
     }
 }

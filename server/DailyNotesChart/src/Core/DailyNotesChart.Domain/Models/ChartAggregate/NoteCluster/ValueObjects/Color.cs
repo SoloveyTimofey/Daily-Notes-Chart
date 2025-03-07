@@ -1,6 +1,6 @@
 ﻿using DailyNotesChart.Domain.Errors;
 using DailyNotesChart.Domain.Primitives;
-using DailyNotesChart.Domain.Shared;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 using System.Text.RegularExpressions;
 
 namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects;

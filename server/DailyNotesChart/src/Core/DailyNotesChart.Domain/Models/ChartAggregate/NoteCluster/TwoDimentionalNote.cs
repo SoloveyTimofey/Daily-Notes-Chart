@@ -4,14 +4,14 @@ using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObject
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.Exceptions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
-using DailyNotesChart.Domain.Shared;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 
 public sealed class TwoDimentionalNote : NoteBase
 {
     #pragma warning disable
-    private TwoDimentionalNote() { }
+    private TwoDimentionalNote() { } // EF Core constructor
     #pragma warning disable
     private TwoDimentionalNote(
         ChartId chartId,

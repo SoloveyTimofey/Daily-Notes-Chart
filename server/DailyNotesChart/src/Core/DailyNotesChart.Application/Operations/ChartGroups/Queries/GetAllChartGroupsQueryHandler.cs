@@ -2,11 +2,12 @@
 using DailyNotesChart.Application.Abstractions.Persistance;
 using DailyNotesChart.Application.DTOs.ChartGroups;
 using Microsoft.EntityFrameworkCore;
-using DailyNotesChart.Domain.Shared;
+using DailyNotesChart.Domain.Shared.ResultPattern;
+using DailyNotesChart.Application.ReadModels;
 
 namespace DailyNotesChart.Application.Operations.ChartGroups.Queries;
 
-internal sealed class GetAllChartGroupsQueryHandler : IQueryHandler<GetAllChartGroupsQuery, List<ChartGroupReadDto>>
+internal sealed class GetAllChartGroupsQueryHandler : IQueryHandler<GetAllChartGroupsQuery, List<ChartGroupReadModel>>
 {
     private readonly IReadOnlyRepository _repository;
 
@@ -15,14 +16,13 @@ internal sealed class GetAllChartGroupsQueryHandler : IQueryHandler<GetAllChartG
         _repository = repository;
     }
 
-    public async Task<Result<List<ChartGroupReadDto>>> Handle(GetAllChartGroupsQuery request, CancellationToken cancellationToken)
+    public async Task<Result<List<ChartGroupReadModel>>> Handle(GetAllChartGroupsQuery request, CancellationToken cancellationToken)
     {
-        var chartGroupDtos = await _repository.ChartGroups
-            .Select(chartGroup => new ChartGroupReadDto(chartGroup.Id, chartGroup.Name))
+        var chartGroups = await _repository.ChartGroups
             .ToListAsync();
 
         return Result.Success(
-            chartGroupDtos
+            chartGroups
         );
     }
 }

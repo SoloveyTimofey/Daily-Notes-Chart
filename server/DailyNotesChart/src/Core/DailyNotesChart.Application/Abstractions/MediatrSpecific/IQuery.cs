@@ -1,4 +1,4 @@
-﻿using DailyNotesChart.Domain.Shared;
+﻿using DailyNotesChart.Domain.Shared.ResultPattern;
 using MediatR;
 
 namespace DailyNotesChart.Application.Abstractions.MediatrSpecific;

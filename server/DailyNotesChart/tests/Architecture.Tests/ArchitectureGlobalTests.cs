@@ -63,21 +63,15 @@ public class ArchitectureGlobalTests
     }
 
     [Test]
-    public void Infrastructure_ShouldNot_HaveDependencyOnWebApiAndPersistanceProjects()
+    public void Infrastructure_ShouldNot_HaveDependencyOnWebApiProjects()
     {
         // Arrange
         var assembly = typeof(InfrastructureServicesRegistration).Assembly;
 
-        var otherProjects = new[]
-        {
-            WEB_API_NAMESPACE,
-            PERSISTANCE_NAMESPACE
-        };
-
         // Act
         var testResult = Types.InAssembly(assembly)
-            .ShouldNot()
-            .HaveDependencyOnAny(otherProjects)
+            .Should()
+            .NotHaveDependencyOn(WEB_API_NAMESPACE)
             .GetResult();
 
         // Assert

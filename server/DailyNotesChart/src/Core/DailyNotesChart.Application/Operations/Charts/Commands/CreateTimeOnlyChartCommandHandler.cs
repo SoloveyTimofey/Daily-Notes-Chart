@@ -6,11 +6,11 @@ using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
 using DailyNotesChart.Domain.Services;
-using DailyNotesChart.Domain.Shared;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Application.Operations.Charts.Commands;
 
-internal class CreateTimeOnlyChartCommandHandler : CommandHandlerBase<ChartId>, ICommandHandler<CreateTimeOnlyChartCommand, ChartId>
+internal class CreateTimeOnlyChartCommandHandler : HandlerBase<ChartId>, ICommandHandler<CreateTimeOnlyChartCommand, ChartId>
 {
     private readonly IChartRepository _chartRepository;
     private readonly IChartGroupRepository _chartGroupRepository;

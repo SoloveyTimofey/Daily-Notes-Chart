@@ -17,4 +17,8 @@
     <ProjectReference Include="..\DailyNotesChart.Domain\DailyNotesChart.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>

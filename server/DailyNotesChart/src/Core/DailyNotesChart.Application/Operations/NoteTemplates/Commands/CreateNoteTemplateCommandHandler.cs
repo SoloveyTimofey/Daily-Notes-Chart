@@ -4,11 +4,11 @@ using DailyNotesChart.Domain.Abstractions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
-using DailyNotesChart.Domain.Shared;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Application.Operations.NoteTemplates.Commands;
 
-internal sealed class CreateNoteTemplateCommandHandler : CommandHandlerBase<Guid>, ICommandHandler<CreateNoteTemplateCommand, Guid>
+internal sealed class CreateNoteTemplateCommandHandler : HandlerBase<NoteTemplateId>, ICommandHandler<CreateNoteTemplateCommand, NoteTemplateId>
 {
     private readonly IChartGroupRepository _chartGroupRepository;
 
@@ -17,7 +17,7 @@ internal sealed class CreateNoteTemplateCommandHandler : CommandHandlerBase<Guid
         _chartGroupRepository = chartGroupRepository;
     }
 
-    public async Task<Result<Guid>> Handle(CreateNoteTemplateCommand request, CancellationToken cancellationToken)
+    public async Task<Result<NoteTemplateId>> Handle(CreateNoteTemplateCommand request, CancellationToken cancellationToken)
     {
         if (await _chartGroupRepository.DoesEntityWithSpecifiedIdExistAsync(request.ChartGroupId) is false)
             throw new EntityWithSpecifiedIdDoesNotExistException(nameof(ChartGroup), request.ChartGroupId.Id.ToString());
@@ -36,6 +36,6 @@ internal sealed class CreateNoteTemplateCommandHandler : CommandHandlerBase<Guid
 
         _chartGroupRepository.CreateNoteTemplate(noteTemplateResult.Value!);
 
-        return Result.Success(noteTemplateResult.Value!.Id.Id);
+        return Result.Success(noteTemplateResult.Value!.Id);
     }
 }

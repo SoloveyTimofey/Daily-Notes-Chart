@@ -1,7 +1,7 @@
 ﻿using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects;
-using DailyNotesChart.Domain.Shared;
+using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Domain.Errors;
 
@@ -24,9 +24,9 @@ public static class DomainErrors
 
     public static class Chart
     {
-        public static readonly Error InvaildChartDate = new Error(
+        public static readonly Error InvalidChartDate = new Error(
             "Chart.InvalidDate",
-            $"Inalid chart date. Date must be between {ChartDate.MIN_DATE} and {ChartDate.MAX_DATE}.");
+            $"Invalid chart date. Date must be between {ChartDate.MIN_DATE} and {ChartDate.MAX_DATE}.");
 
         public static readonly Error InvalidChartSummary = new Error(
             "Chart.InvalidSummary",
