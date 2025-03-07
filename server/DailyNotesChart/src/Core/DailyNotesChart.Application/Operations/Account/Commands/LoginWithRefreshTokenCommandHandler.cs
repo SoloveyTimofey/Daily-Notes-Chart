@@ -3,18 +3,18 @@ using DailyNotesChart.Application.Abstractions.MediatrSpecific;
 using DailyNotesChart.Application.DTOs.Identity;
 using DailyNotesChart.Domain.Shared.ResultPattern;
 
-namespace DailyNotesChart.Application.Operations.Account.Queries;
+namespace DailyNotesChart.Application.Operations.Account.Commands;
 
-internal sealed class LoginWithRefreshTokenQueryHandler : HandlerBase<TokenDto>, IQueryHandler<LoginWithRefreshTokenQuery, TokenDto>
+internal sealed class LoginWithRefreshTokenCommandHandler : HandlerBase<TokenDto>, ICommandHandler<LoginWithRefreshTokenCommand, TokenDto>
 {
     private readonly IAccountService _accountService;
 
-    public LoginWithRefreshTokenQueryHandler(IAccountService accountService)
+    public LoginWithRefreshTokenCommandHandler(IAccountService accountService)
     {
         _accountService = accountService;
     }
 
-    public async Task<Result<TokenDto>> Handle(LoginWithRefreshTokenQuery request, CancellationToken cancellationToken)
+    public async Task<Result<TokenDto>> Handle(LoginWithRefreshTokenCommand request, CancellationToken cancellationToken)
     {
         var checkRefreshTokenResult = await _accountService.CheckRefreshTokenAsync(request.RefreshToken);
         if (checkRefreshTokenResult.IsFailure)

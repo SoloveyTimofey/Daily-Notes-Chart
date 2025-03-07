@@ -1,9 +1,9 @@
 ﻿using DailyNotesChart.Application.Abstractions.MediatrSpecific;
 using DailyNotesChart.Application.DTOs.Identity;
 
-namespace DailyNotesChart.Application.Operations.Account.Queries;
+namespace DailyNotesChart.Application.Operations.Account.Commands;
 
-public sealed record LoginByEmailQuery(
+public sealed record LoginByEmailCommand(
     string Email,
     string Password
-) : IQuery<TokenDto>;
+) : ICommand<TokenDto>;

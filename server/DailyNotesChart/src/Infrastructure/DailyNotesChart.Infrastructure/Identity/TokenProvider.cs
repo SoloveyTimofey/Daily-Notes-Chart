@@ -19,15 +19,13 @@ internal sealed class TokenProvider : ITokenProvider
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IRefreshTokenRepository _refreshTokenRepository;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IConfiguration _configuration;
 
-    public TokenProvider(UserManager<ApplicationUser> userManager, IConfiguration configuration, IRefreshTokenRepository refreshTokenRepository, IUnitOfWork unitOfWork)
+    public TokenProvider(UserManager<ApplicationUser> userManager, IConfiguration configuration, IRefreshTokenRepository refreshTokenRepository)
     {
         _userManager = userManager;
         _configuration = configuration;
         _refreshTokenRepository = refreshTokenRepository;
-        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<string>> GenerateTokenForUserByEmailAsync(string userEmail)
@@ -72,7 +70,6 @@ internal sealed class TokenProvider : ITokenProvider
 
         _refreshTokenRepository.Add(refreshTokenDbModel);
         await _refreshTokenRepository.RemovePreviousRefreshTokensForApplicationUserAsync(userId); // Remoe previous refresh tokens
-        await _unitOfWork.SaveChangesAsync();
 
         return refreshToken;
     }

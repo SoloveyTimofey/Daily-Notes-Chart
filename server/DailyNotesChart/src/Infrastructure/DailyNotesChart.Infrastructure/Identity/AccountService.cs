@@ -1,17 +1,13 @@
-﻿using Azure.Core;
-using DailyNotesChart.Application.Abstractions.Identity;
+﻿using DailyNotesChart.Application.Abstractions.Identity;
 using DailyNotesChart.Application.Abstractions.Persistance;
-using DailyNotesChart.Application.DTOs.Identity;
 using DailyNotesChart.Application.Errors;
 using DailyNotesChart.Application.Shared;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
 using DailyNotesChart.Domain.Shared.ResultPattern;
 using DailyNotesChart.Infrastructure.Extensions;
-using DailyNotesChart.Persistance.Contexts;
 using DailyNotesChart.Persistance.InternalAbstractions;
 using DailyNotesChart.Persistance.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace DailyNotesChart.Infrastructure.Identity;
 
@@ -21,15 +17,13 @@ internal sealed class AccountService : IAccountService
     private readonly RoleManager<IdentityRole<ApplicationUserId>> _roleManager;
     private readonly ITokenProvider _tokenProvider;
     private readonly IRefreshTokenRepository _refreshTokenRepository;
-    private readonly IUnitOfWork _unitOfWork;
 
-    public AccountService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole<ApplicationUserId>> roleManager, ITokenProvider tokenProvider, IRefreshTokenRepository refreshTokenRepository, IUnitOfWork unitOfWork)
+    public AccountService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole<ApplicationUserId>> roleManager, ITokenProvider tokenProvider, IRefreshTokenRepository refreshTokenRepository)
     {
         _userManager = userManager;
         _roleManager = roleManager;
         _tokenProvider = tokenProvider;
         _refreshTokenRepository = refreshTokenRepository;
-        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result> CheckIfPasswordValidByEmailAsync(string email, string password)

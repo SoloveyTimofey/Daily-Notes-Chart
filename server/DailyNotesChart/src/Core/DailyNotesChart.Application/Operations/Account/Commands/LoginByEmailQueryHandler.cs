@@ -4,9 +4,9 @@ using DailyNotesChart.Application.DTOs.Identity;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
 using DailyNotesChart.Domain.Shared.ResultPattern;
 
-namespace DailyNotesChart.Application.Operations.Account.Queries;
+namespace DailyNotesChart.Application.Operations.Account.Commands;
 
-internal sealed class LoginByEmailQueryHandler : HandlerBase<TokenDto>, IQueryHandler<LoginByEmailQuery, TokenDto>
+internal sealed class LoginByEmailQueryHandler : HandlerBase<TokenDto>, ICommandHandler<LoginByEmailCommand, TokenDto>
 {
     private readonly ITokenProvider _tokenProvider;
     private readonly IAccountService _accountService;
@@ -17,7 +17,7 @@ internal sealed class LoginByEmailQueryHandler : HandlerBase<TokenDto>, IQueryHa
         _accountService = accountService;
     }
 
-    public async Task<Result<TokenDto>> Handle(LoginByEmailQuery request, CancellationToken cancellationToken)
+    public async Task<Result<TokenDto>> Handle(LoginByEmailCommand request, CancellationToken cancellationToken)
     {
         var getIdResult = await _accountService.GetIdByUserEmail(request.Email);
         if (getIdResult.IsFailure)

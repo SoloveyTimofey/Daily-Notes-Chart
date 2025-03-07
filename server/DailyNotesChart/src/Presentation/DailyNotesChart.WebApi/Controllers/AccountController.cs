@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DailyNotesChart.Application.Operations.Account.Commands;
-using DailyNotesChart.Application.Operations.Account.Queries;
 using DailyNotesChart.WebApi.Requests.Account;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -33,9 +32,9 @@ public class AccountController : ApplicationBaseController
     [HttpPost, Route(nameof(LoginByEmail))]
     public async Task<IActionResult> LoginByEmail([FromBody] LoginByEmailRequest request)
     {
-        var query = _mapper.Map<LoginByEmailQuery>(request);
+        var command = _mapper.Map<LoginByEmailCommand>(request);
 
-        var result = await _sender.Send(query);
+        var result = await _sender.Send(command);
 
         return GetActionResult(result);
     }
@@ -43,9 +42,9 @@ public class AccountController : ApplicationBaseController
     [HttpPost, Route(nameof(LoginByUserName))]
     public async Task<IActionResult> LoginByUserName([FromBody] LoginByUserNameRequest request)
     {
-        var query = _mapper.Map<LoginByUserNameQuery>(request);
+        var command = _mapper.Map<LoginByUserNameCommand>(request);
 
-        var result = await _sender.Send(query);
+        var result = await _sender.Send(command);
 
         return GetActionResult(result);
     }
@@ -53,9 +52,9 @@ public class AccountController : ApplicationBaseController
     [HttpPost, Route(nameof(LoginWithRefreshToken))]
     public async Task<IActionResult> LoginWithRefreshToken([FromBody] LoginWithRefreshTokenRequest request)
     {
-        var query = _mapper.Map<LoginWithRefreshTokenQuery>(request);
+        var command = _mapper.Map<LoginWithRefreshTokenCommand>(request);
 
-        var result = await _sender.Send(query);
+        var result = await _sender.Send(command);
 
         return GetActionResult(result);
     }
