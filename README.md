@@ -5,7 +5,7 @@ I've came up with idea to create this app when i was reading the Why We Sleep bo
 The second and more important purpose of this project is to practice my certain knowledge.
 
 ## Fancy Words about Technologies and Aprroaches that were taken in this project
-> Clean Architecture, CQRS, DDD, Rich Domain Model, Result Pattern, Auto Mapper, MediatR, EF Core, ASP.NET Core Web API, JWT Bearer, Unit and Architecture Tests, Next.JS
+> Clean Architecture, CQRS, DDD, Rich Domain Model, Result Pattern, Auto Mapper, MediatR, EF Core, ASP.NET Core Web API, JWT Bearer, Unit and Architecture Tests, Design Patterns, Next.JS
 - I tried to apply DDD and create server side architecture based on Clean Architecture. 
 - As far as Clean Architecture is a domain centric architecture and i applied DDD, i also tried to use Rich Domain Model, so all business logic is located in Domain layer.
 - Also my Core part of architecture is really abstracted away from concrete infrastructure details like Microsoft.AspNetCore.Identity and EF Core.
