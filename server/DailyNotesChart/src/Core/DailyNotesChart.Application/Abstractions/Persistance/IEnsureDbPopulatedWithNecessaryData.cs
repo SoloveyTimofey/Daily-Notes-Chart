@@ -1,6 +1,6 @@
 ﻿namespace DailyNotesChart.Application.Abstractions.Persistance;
 
-public interface IEnsureDbPopulated
+public interface IEnsureDbPopulatedWithNecessaryData
 {
     Task Ensure();
 }

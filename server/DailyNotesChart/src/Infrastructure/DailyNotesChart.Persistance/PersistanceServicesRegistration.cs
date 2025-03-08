@@ -92,7 +92,7 @@ public static class PersistanceServicesRegistration
         services.AddScoped<IChartRepository, ChartRepository>();
         services.AddScoped<IReadOnlyRepository, ReadOnlyRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IEnsureDbPopulated, EnsureDbPopulatedWithIdentityData>();
+        services.AddScoped<IEnsureDbPopulatedWithNecessaryData, EnsureDbPopulatedWithIdentityData>();
         services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
         return services;

@@ -69,7 +69,7 @@ internal sealed class TokenProvider : ITokenProvider
         };
 
         _refreshTokenRepository.Add(refreshTokenDbModel);
-        await _refreshTokenRepository.RemovePreviousRefreshTokensForApplicationUserAsync(userId); // Remoe previous refresh tokens
+        await _refreshTokenRepository.RemovePreviousRefreshTokensForSpecifiedApplicationUserAsync(userId); // Remoe previous refresh tokens
 
         return refreshToken;
     }

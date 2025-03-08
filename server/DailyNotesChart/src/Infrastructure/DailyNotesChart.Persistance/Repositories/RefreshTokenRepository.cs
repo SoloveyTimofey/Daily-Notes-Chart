@@ -25,7 +25,7 @@ internal sealed class RefreshTokenRepository : IRefreshTokenRepository
             .Include(r => r.ApplicationUser)
             .FirstOrDefaultAsync(r => r.Token == refreshTokenValue);
 
-    public async Task RemovePreviousRefreshTokensForApplicationUserAsync(ApplicationUserId userId)
+    public async Task RemovePreviousRefreshTokensForSpecifiedApplicationUserAsync(ApplicationUserId userId)
     {
         var tokensToRemove = await _context.RefreshTokens
             .Where(token => token.ApplicationUserId == userId)

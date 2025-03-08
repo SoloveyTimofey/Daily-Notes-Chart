@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DailyNotesChart.Persistance.Services;
 
-internal sealed class EnsureDbPopulatedWithIdentityData : IEnsureDbPopulated
+internal sealed class EnsureDbPopulatedWithIdentityData : IEnsureDbPopulatedWithNecessaryData
 {
     private readonly RoleManager<IdentityRole<ApplicationUserId>> _roleManager;
 

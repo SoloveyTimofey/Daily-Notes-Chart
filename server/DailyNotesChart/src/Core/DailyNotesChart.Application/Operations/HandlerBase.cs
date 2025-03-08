@@ -5,7 +5,7 @@ namespace DailyNotesChart.Application.Operations;
 
 public abstract class HandlerBase<TResponse>
 {
-    private const string EXCEPTION_MESSAGE = "Before calling this method you have checked if result is failure.";
+    private const string EXCEPTION_MESSAGE = "Before calling this method you need to be sure that result if failure.";
 
     protected static Task<Result<TResponse>> FailureAsync(Result result)
     {

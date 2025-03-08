@@ -25,7 +25,7 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var ensurePopulatedWithIdentityData = scope.ServiceProvider.GetRequiredService<IEnsureDbPopulated>();
+    var ensurePopulatedWithIdentityData = scope.ServiceProvider.GetRequiredService<IEnsureDbPopulatedWithNecessaryData>();
 
     await ensurePopulatedWithIdentityData.Ensure();
 }
