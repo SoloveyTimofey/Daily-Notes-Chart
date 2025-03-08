@@ -22,4 +22,4 @@ Rich Domain Model:
 
 Books:
 - Clean Architecture by Robert Martin
-- Domain-Driven Design: Tackling Complexity in the Heart of Software be Eric Evans
+- Domain-Driven Design: Tackling Complexity in the Heart of Software by Eric Evans
