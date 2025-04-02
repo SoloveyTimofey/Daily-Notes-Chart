@@ -12,14 +12,14 @@ internal sealed class DailyNotesChartReadDbContext : IdentityDbContext<Applicati
 {
     public DailyNotesChartReadDbContext(DbContextOptions<DailyNotesChartReadDbContext> options) : base(options) { }
 
-    public DbSet<ChartGroupReadModel> ChartGroups { get; set; }
+    //public DbSet<ChartGroupReadModel> ChartGroups { get; set; }
     public DbSet<ChartBaseReadModel> Charts { get; set; }
     public DbSet<TimeOnlyChartReadModel> TimeOnlyCharts { get; set; }
     public DbSet<TwoDimensionalChartReadModel> TwoDimensionalCharts { get; set; }
     public DbSet<NoteTemplateReadModel> NoteTemplates { get; set; }
     public DbSet<NoteBaseReadModel> Notes { get; set; }
     public DbSet<TimeOnlyNoteReadModel> TimeOnlyNotes { get; set; }
-    public DbSet<TwoDimensionalNoteReadModel> TwoDimentionalNotes { get; set; }
+    public DbSet<TwoDimensionalNoteReadModel> TwoDimensionalNotes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

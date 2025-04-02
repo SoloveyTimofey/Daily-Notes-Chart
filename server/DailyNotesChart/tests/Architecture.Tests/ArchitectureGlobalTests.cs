@@ -82,7 +82,7 @@ public class ArchitectureGlobalTests
     public void Persistance_ShouldNot_HaveDependencyOnWebApiAndInfrastructureProjects()
     {
         // Arrange
-        var assembly = typeof(PersistanceServicesRegistration).Assembly;
+        var assembly = typeof(PersistenceServicesRegistration).Assembly;
 
         var otherProjects = new[]
         {
@@ -115,7 +115,7 @@ public class ArchitectureGlobalTests
         var allowedTypes = new[]
         {
             typeof(InfrastructureServicesRegistration).FullName,
-            typeof(PersistanceServicesRegistration).FullName,
+            typeof(PersistenceServicesRegistration).FullName,
             "DailyNotesChart.Persistance.Contexts.DailyNotesChartWriteDbContext"
         };
 

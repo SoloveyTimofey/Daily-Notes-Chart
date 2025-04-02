@@ -5,7 +5,6 @@ using DailyNotesChart.Infrastructure;
 using DailyNotesChart.WebApi.Extensions;
 using System.Reflection;
 using DailyNotesChart.Application.Abstractions.Persistance;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +15,17 @@ builder.Services.AddSwaggerGen();
 builder.Services
     .AddDomainServices()
     .AddApplicationServices()
-    .AddPersistanceServices(builder.Configuration)
-    .AddInfrastructureServices();    
+    .AddPersistenceServices(builder.Configuration)
+    .AddInfrastructureServices();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials());
+});
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly(), typeof(ApplicationServicesRegistration).Assembly);
 
@@ -38,6 +46,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthentication();
 app.UseAuthorization();

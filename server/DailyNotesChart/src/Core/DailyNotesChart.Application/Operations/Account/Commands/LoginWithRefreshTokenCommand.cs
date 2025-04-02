@@ -5,4 +5,4 @@ namespace DailyNotesChart.Application.Operations.Account.Commands;
 
 public sealed record LoginWithRefreshTokenCommand(
     string RefreshToken
-) : ICommand<TokenDto>;
+) : ICommand<AuthResultDto>;

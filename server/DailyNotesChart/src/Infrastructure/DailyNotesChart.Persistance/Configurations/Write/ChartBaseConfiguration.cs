@@ -17,7 +17,7 @@ internal sealed class ChartBaseConfiguration : IEntityTypeConfiguration<ChartBas
                 chartId => chartId.Id,
                 value => new ChartId(value)
             );
-
+        
         builder.Property(c => c.Date)
             .HasConversion(
                 date => date.Value,

@@ -58,7 +58,7 @@ namespace DailyNotesChart.Persistance.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ApplicationUserId")
+                    b.Property<Guid>("CreatorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("DefaultChartTemplate")
@@ -75,7 +75,7 @@ namespace DailyNotesChart.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("CreatorId");
 
                     b.HasIndex("DefaultNoteTemplateId");
 
@@ -418,7 +418,9 @@ namespace DailyNotesChart.Persistance.Migrations
                 {
                     b.HasOne("DailyNotesChart.Persistance.Models.ApplicationUser", null)
                         .WithMany("ChartGroups")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster.NoteTemplate", "DefaultNoteTemplate")
                         .WithMany()

@@ -13,7 +13,7 @@ using System.Security.Claims;
 namespace DailyNotesChart.WebApi.Controllers;
 
 [ApiController]
-[Authorize]
+//[Authorize]
 [Route("api/[controller]")]
 public class ChartGroupsController : ApplicationBaseController
 {

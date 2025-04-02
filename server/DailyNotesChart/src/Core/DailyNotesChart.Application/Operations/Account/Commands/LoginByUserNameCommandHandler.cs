@@ -6,7 +6,7 @@ using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Application.Operations.Account.Commands;
 
-internal class LoginByUserNameCommandHandler : HandlerBase<TokenDto>, ICommandHandler<LoginByUserNameCommand, TokenDto>
+internal class LoginByUserNameCommandHandler : HandlerBase<AuthResultDto>, ICommandHandler<LoginByUserNameCommand, AuthResultDto>
 {
     private readonly ITokenProvider _tokenProvider;
     private readonly IAccountService _accountService;
@@ -17,27 +17,27 @@ internal class LoginByUserNameCommandHandler : HandlerBase<TokenDto>, ICommandHa
         _accountService = accountService;
     }
 
-    public async Task<Result<TokenDto>> Handle(LoginByUserNameCommand request, CancellationToken cancellationToken)
+    public async Task<Result<AuthResultDto>> Handle(LoginByUserNameCommand request, CancellationToken cancellationToken)
     {
-        var getIdResult = await _accountService.GetIdByUserName(request.UserName);
-        if (getIdResult.IsFailure)
-            return Failure(getIdResult);
+        var userInfo = await _accountService.GetUserInformationByName(request.UserName);
+        if (userInfo.IsFailure)
+            return Failure(userInfo);
 
-        ApplicationUserId userId = getIdResult.Value!;
+        var userInfoVal = userInfo.Value!;
 
         var isPasswordValidResult = await _accountService.CheckIfPasswordValidByUserNameAsync(request.UserName, request.Password);
         if (isPasswordValidResult.IsFailure)
-            return Result.Failure<TokenDto>([.. isPasswordValidResult.Errors]);
+            return Result.Failure<AuthResultDto>([.. isPasswordValidResult.Errors]);
 
-        var tokenResult = await _tokenProvider.GenerateTokenForUserByUserNameAsync(request.UserName);
+        var tokenResult = await _tokenProvider.GenerateAccessTokenForUserByUserNameAsync(request.UserName);
 
         if (tokenResult.IsFailure)
             return Failure(tokenResult);
 
-        var refreshToken = await _tokenProvider.GenerateRefreshTokenForUserAsync(userId);
+        var refreshToken = await _tokenProvider.GenerateRefreshTokenForUserAsync(userInfoVal.UserId);
 
         return Result.Success(
-            new TokenDto(tokenResult.Value!, refreshToken)
+            new AuthResultDto(userInfoVal.UserId.Id, userInfoVal.UserName, userInfoVal.UserEmail, userInfoVal.Roles, tokenResult.Value!, refreshToken)
         );
     }
 }

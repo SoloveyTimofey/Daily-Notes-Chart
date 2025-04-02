@@ -9,10 +9,10 @@ public class PeristanceTests
     public void PersistanceClasses_ShouldNot_BePublic()
     {
         // Act
-        var testResult = Types.InAssembly(typeof(PersistanceServicesRegistration).Assembly)
+        var testResult = Types.InAssembly(typeof(PersistenceServicesRegistration).Assembly)
             .That()
             .AreClasses()
-            .And().DoNotHaveName(nameof(PersistanceServicesRegistration))
+            .And().DoNotHaveName(nameof(PersistenceServicesRegistration))
             .And().DoNotResideInNamespaceContaining("Migrations")
             .ShouldNot()
             .BePublic()

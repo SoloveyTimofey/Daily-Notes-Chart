@@ -11,5 +11,5 @@ public interface IReadOnlyRepository
     IQueryable<NoteTemplateReadModel> NoteTemplates { get; }
     IQueryable<NoteBaseReadModel> Notes { get; }
     IQueryable<TimeOnlyNoteReadModel> TimeOnlyNotes { get; }
-    IQueryable<TwoDimensionalNoteReadModel> TwoDimentionalNotes { get; }
+    IQueryable<TwoDimensionalNoteReadModel> TwoDimensionalNotes { get; }
 }

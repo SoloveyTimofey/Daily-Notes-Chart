@@ -7,6 +7,5 @@ namespace DailyNotesChart.Application.Operations.ChartGroups.Commands;
 public sealed record CreateChartGroupCommand(
     string Name,
     Guid CreatorId,
-    CreateDefaultChartTemplateDto? DefaultChartTemplate = null,
-    CreateNoteTemplateDto? DefaultNoteTemplate = null
+    CreateDefaultChartTemplateDto? DefaultChartTemplate = null
 ) : ICommand<ChartGroupId>;
