@@ -1,5 +1,5 @@
 ﻿using DailyNotesChart.Application.Abstractions.Identity;
-using DailyNotesChart.Application.Abstractions.Persistance;
+using DailyNotesChart.Application.DTOs.Identity;
 using DailyNotesChart.Application.Errors;
 using DailyNotesChart.Application.Shared;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
@@ -33,21 +33,21 @@ internal sealed class AccountService : IAccountService
             return Result.Failure(ApplicationErrors.Account.InvalidEmailOrPassword);
 
         var isPasswordValid = await _userManager.CheckPasswordAsync(user, password);
-        return Result.Success(
-            isPasswordValid
-        );
+
+        if (isPasswordValid) return Result.Success();
+        else return Result.Failure(ApplicationErrors.Account.InvalidEmailOrPassword);
     }
 
     public async Task<Result> CheckIfPasswordValidByUserNameAsync(string userName, string password)
     {
         ApplicationUser? user = await _userManager.FindByNameAsync(userName);
         if (user is null)
-            return Result.Failure(ApplicationErrors.Account.InvalidEmailOrPassword);
+            return Result.Failure<bool>(ApplicationErrors.Account.InvalidUserNameOrPassword);
 
-        var isPasswordValid = await _userManager.CheckPasswordAsync(user, password);
-        return Result.Success(
-            isPasswordValid
-        );
+        bool isPasswordValid = await _userManager.CheckPasswordAsync(user, password);
+
+        if (isPasswordValid) return Result.Success();
+        else return Result.Failure(ApplicationErrors.Account.InvalidUserNameOrPassword);
     }
 
     public async Task<Result<(string accessToken, string refreshToken)>> CheckRefreshTokenAsync(string refreshToken)
@@ -64,7 +64,7 @@ internal sealed class AccountService : IAccountService
         //await _context.SaveChangesAsync();
 
         string newRefreshToken = await _tokenProvider.GenerateRefreshTokenForUserAsync(refreshTokenDbModel.ApplicationUserId);
-        var generateAccessTokenResult = await _tokenProvider.GenerateTokenForUserByEmailAsync(refreshTokenDbModel.ApplicationUser.Email!);
+        var generateAccessTokenResult = await _tokenProvider.GenerateAccessTokenForUserByEmailAsync(refreshTokenDbModel.ApplicationUser.Email!);
         var newAccessToken = generateAccessTokenResult.Value!;
 
         return Result.Success(
@@ -72,23 +72,40 @@ internal sealed class AccountService : IAccountService
         );
     }
 
-    public async Task<Result<ApplicationUserId>> GetIdByUserEmail(string email)
+    public async Task<Result<UserInformationDto>> GetUserInformationByEmail(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
+
         return user != null 
-            ? Result.Success(user.Id) 
-            : Result.Failure<ApplicationUserId>(ApplicationErrors.Account.InvalidEmailOrPassword);
+            ? Result.Success(await CreateUserInformation(user)) 
+            : Result.Failure<UserInformationDto>(ApplicationErrors.Account.InvalidEmailOrPassword);
     }
 
-    public async Task<Result<ApplicationUserId>> GetIdByUserName(string userName)
+    public async Task<Result<UserInformationDto>> GetUserInformationByName(string userName)
     {
         var user = await _userManager.FindByNameAsync(userName);
         return user != null
-            ? Result.Success(user.Id)
-            : Result.Failure<ApplicationUserId>(ApplicationErrors.Account.InvalidUserNameOrPassword);
+            ? Result.Success(await CreateUserInformation(user))
+            : Result.Failure<UserInformationDto>(ApplicationErrors.Account.InvalidUserNameOrPassword);
     }
 
-    public async Task<Result<ApplicationUserId>> RegisterAsync(string userName, string email, string password)
+    public async Task<Result<UserInformationDto>> GetUserInformationByRefreshTokenAsync(string refreshToken)
+    {
+        var user = await _refreshTokenRepository.GetRefreshTokenOwner(refreshToken);
+
+        return Result.Success(
+            await CreateUserInformation(user)
+        );
+    }
+
+    private async Task<UserInformationDto> CreateUserInformation(ApplicationUser user)
+    {
+        var roles = await _userManager.GetRolesAsync(user);
+
+        return new UserInformationDto(user.Id, user.UserName!, user.Email!, roles.ToArray());
+    }
+
+    public async Task<Result<UserInformationDto>> RegisterAsync(string userName, string email, string password)
     {
         var applicationUser = new ApplicationUser
         {
@@ -99,14 +116,14 @@ internal sealed class AccountService : IAccountService
 
         IdentityResult createUserResult = await _userManager.CreateAsync(applicationUser, password);
         if (createUserResult.Succeeded is false)
-            return createUserResult.ToFailureResult<ApplicationUserId>();
+            return createUserResult.ToFailureResult<UserInformationDto>();
 
         IdentityResult addToRoleResult = await _userManager.AddToRoleAsync(applicationUser, Roles.User);
         if (addToRoleResult.Succeeded is false)
-            return addToRoleResult.ToFailureResult<ApplicationUserId>();
+            return addToRoleResult.ToFailureResult<UserInformationDto>();
 
         return Result.Success(
-            applicationUser.Id
+            await CreateUserInformation(applicationUser)
         );
     }
 }

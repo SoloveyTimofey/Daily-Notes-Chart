@@ -1,5 +1,17 @@
-﻿using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
+﻿using DailyNotesChart.Persistance.Contexts;
+using Microsoft.EntityFrameworkCore;
 
-var id = new ChartId(Guid.NewGuid());
+var readOptionsBuilder = new DbContextOptionsBuilder<DailyNotesChartReadDbContext>();
+readOptionsBuilder.UseSqlServer("Server=.;Database=DailyNotesChart;User Id=sa;Password=root;MultipleActiveResultSets=True;TrustServerCertificate=True;");
 
-Console.WriteLine(id.Id.ToString());
+using var readContext = new DailyNotesChartReadDbContext(readOptionsBuilder.Options);
+
+var writeOptionsBuilder = new DbContextOptionsBuilder<DailyNotesChartWriteDbContext>();
+writeOptionsBuilder.UseSqlServer("Server=.;Database=DailyNotesChart;User Id=sa;Password=root;MultipleActiveResultSets=True;TrustServerCertificate=True;");
+
+using var writeContext = new DailyNotesChartWriteDbContext(writeOptionsBuilder.Options);
+
+var chartGroupsFromReadContext = readContext.Charts;
+var chartGroupsFromWriteContext = writeContext.ChartGroups;
+
+Console.ReadLine();

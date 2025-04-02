@@ -5,7 +5,7 @@ using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Application.Operations.Account.Commands;
 
-internal sealed class RegisterCommandHandler : HandlerBase<TokenDto>, ICommandHandler<RegisterCommand, TokenDto>
+internal sealed class RegisterCommandHandler : HandlerBase<AuthResultDto>, ICommandHandler<RegisterCommand, AuthResultDto>
 {
     private readonly IAccountService _accountService;
     private readonly ITokenProvider _tokenProvider;
@@ -16,20 +16,22 @@ internal sealed class RegisterCommandHandler : HandlerBase<TokenDto>, ICommandHa
         _tokenProvider = tokenProvider;
     }
 
-    public async Task<Result<TokenDto>> Handle(RegisterCommand request, CancellationToken cancellationToken)
+    public async Task<Result<AuthResultDto>> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
         var registerResult = await _accountService.RegisterAsync(request.UserName, request.Email, request.Password);
         if (registerResult.IsFailure)
             return Failure(registerResult);
 
-        var tokenResult = await _tokenProvider.GenerateTokenForUserByEmailAsync(request.Email);
+        var tokenResult = await _tokenProvider.GenerateAccessTokenForUserByEmailAsync(request.Email);
         if (tokenResult.IsFailure)
             return Failure(tokenResult);
 
-        var refreshToken = await _tokenProvider.GenerateRefreshTokenForUserAsync(registerResult.Value!);
+        var userInfoValue = registerResult.Value!;
+
+        var refreshToken = await _tokenProvider.GenerateRefreshTokenForUserAsync(userInfoValue.UserId);
 
         return Result.Success(
-            new TokenDto(tokenResult.Value!, refreshToken)
+            new AuthResultDto(userInfoValue.UserId.Id, userInfoValue.UserName, userInfoValue.UserEmail, userInfoValue.Roles, tokenResult.Value!, refreshToken)
         );
     }
 }

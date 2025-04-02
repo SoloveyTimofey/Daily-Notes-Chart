@@ -28,7 +28,7 @@ internal sealed class TokenProvider : ITokenProvider
         _refreshTokenRepository = refreshTokenRepository;
     }
 
-    public async Task<Result<string>> GenerateTokenForUserByEmailAsync(string userEmail)
+    public async Task<Result<string>> GenerateAccessTokenForUserByEmailAsync(string userEmail)
     {
         ApplicationUser? user = await _userManager.FindByEmailAsync(userEmail);
         if (user is null)
@@ -41,7 +41,7 @@ internal sealed class TokenProvider : ITokenProvider
         );
     }
 
-    public async Task<Result<string>> GenerateTokenForUserByUserNameAsync(string userName)
+    public async Task<Result<string>> GenerateAccessTokenForUserByUserNameAsync(string userName)
     {
         ApplicationUser? user = await _userManager.FindByNameAsync(userName);
         if (user is null)

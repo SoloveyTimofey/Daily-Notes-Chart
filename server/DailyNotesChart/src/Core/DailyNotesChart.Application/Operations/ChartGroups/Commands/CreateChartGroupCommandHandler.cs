@@ -5,8 +5,6 @@ using DailyNotesChart.Domain.Abstractions;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot.ValueObjects;
 using DailyNotesChart.Domain.Models.ChartGroupAggregate.ChartCluster.ValueObjects;
-using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster.ValueObjects;
-using DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteTemplateCluster;
 using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Application.Operations.ChartGroups.Commands;
@@ -49,18 +47,6 @@ internal sealed class CreateChartGroupCommandHandler : HandlerBase<ChartGroupId>
         ChartGroup chartGroup = chartGroupResult.Value!;
 
         _chartGroupRepository.Create(chartGroup);
-        await _unitOfWork.SaveChangesAsync();
-
-        if (request.DefaultNoteTemplate is not null)
-        {
-            var noteTemplateResult = CreateDefaultNoteTemplate(request.DefaultNoteTemplate, chartGroup.Id);
-            if (noteTemplateResult.IsFailure)
-                return await FailureAsync(noteTemplateResult);
-
-            var setDefaultNoteTemplateResult = chartGroup.SetDefaultNoteTemplate(noteTemplateResult.Value!);
-            if (setDefaultNoteTemplateResult.IsFailure)
-                return await FailureAsync(setDefaultNoteTemplateResult);
-        }
 
         return await Task.FromResult(Result.Success(chartGroup.Id));
     }
@@ -78,24 +64,5 @@ internal sealed class CreateChartGroupCommandHandler : HandlerBase<ChartGroupId>
         var defaultChartTemplate = new DefaultChartTemplate(yAxeNameResult.Value!, yAxeValuesResult.Value!);
 
         return Result.Success(defaultChartTemplate);
-    }
-
-    private Result<NoteTemplate> CreateDefaultNoteTemplate(CreateNoteTemplateDto createParams, ChartGroupId chartGroupId)
-    {
-        var colorResult = Color.Create(createParams.Color);
-        if (colorResult.IsFailure)
-            return Failure<NoteTemplate>(colorResult);
-
-        var noteDescriptionResult = NoteDescription.Create(createParams.NoteDescription);
-        if (noteDescriptionResult.IsFailure)
-            return Failure<NoteTemplate>(noteDescriptionResult);
-
-        var noteTemplateResult = NoteTemplate.Create(chartGroupId, colorResult.Value!, noteDescriptionResult.Value!);
-        if (noteTemplateResult.IsFailure)
-            return Failure<NoteTemplate>(noteTemplateResult);
-
-        _chartGroupRepository.CreateNoteTemplate(noteTemplateResult.Value!);
-
-        return Result.Success(noteTemplateResult.Value!);
     }
 }

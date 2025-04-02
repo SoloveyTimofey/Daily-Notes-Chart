@@ -16,5 +16,9 @@ internal sealed class ApplicationUserConfiguration : IEntityTypeConfiguration<Ap
             .WithOne(r => r.ApplicationUser)
             .HasForeignKey(r => r.ApplicationUserId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(u => u.ChartGroups)
+            .WithOne()
+            .HasForeignKey(cg => cg.CreatorId);
     }
 }

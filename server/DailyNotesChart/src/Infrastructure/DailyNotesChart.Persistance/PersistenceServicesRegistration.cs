@@ -16,9 +16,9 @@ using System.Text;
 
 namespace DailyNotesChart.Persistance;
 
-public static class PersistanceServicesRegistration
+public static class PersistenceServicesRegistration
 {
-    public static IServiceCollection AddPersistanceServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<DailyNotesChartWriteDbContext>(dbContextOptionsBuilder =>
         {

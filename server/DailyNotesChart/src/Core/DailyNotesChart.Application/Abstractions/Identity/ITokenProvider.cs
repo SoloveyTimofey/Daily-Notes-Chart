@@ -5,8 +5,8 @@ namespace DailyNotesChart.Application.Abstractions.Identity;
 
 public interface ITokenProvider
 {
-    Task<Result<string>> GenerateTokenForUserByEmailAsync(string userEmail);
-    Task<Result<string>> GenerateTokenForUserByUserNameAsync(string userName);
+    Task<Result<string>> GenerateAccessTokenForUserByEmailAsync(string userEmail);
+    Task<Result<string>> GenerateAccessTokenForUserByUserNameAsync(string userName);
 
     /// <summary>
     /// Generates refresh token and saves it in the db

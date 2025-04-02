@@ -7,4 +7,4 @@ public sealed record RegisterCommand(
     string UserName,
     string Email,
     string Password
-) : ICommand<TokenDto>;
+) : ICommand<AuthResultDto>;

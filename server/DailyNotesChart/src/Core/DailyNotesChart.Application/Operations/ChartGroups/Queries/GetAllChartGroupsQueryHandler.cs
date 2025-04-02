@@ -18,11 +18,10 @@ internal sealed class GetAllChartGroupsQueryHandler : IQueryHandler<GetAllChartG
 
     public async Task<Result<List<ChartGroupReadModel>>> Handle(GetAllChartGroupsQuery request, CancellationToken cancellationToken)
     {
-        var chartGroups = await _repository.ChartGroups
-            .ToListAsync();
+        var chartGroups = _repository.ChartGroups;
 
         return Result.Success(
-            chartGroups
+            await chartGroups.ToListAsync()
         );
     }
 }

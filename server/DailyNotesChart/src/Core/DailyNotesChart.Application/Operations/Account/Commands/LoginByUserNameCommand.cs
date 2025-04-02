@@ -6,4 +6,4 @@ namespace DailyNotesChart.Application.Operations.Account.Commands;
 public sealed record LoginByUserNameCommand(
     string UserName,
     string Password
-) : ICommand<TokenDto>;
+) : ICommand<AuthResultDto>;
