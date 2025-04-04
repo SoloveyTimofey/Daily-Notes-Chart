@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DailyNotesChart.Persistance.Configurations.Write;
 
-internal sealed class TwoDimensionalNoteConfiguration : IEntityTypeConfiguration<TwoDimentionalNote>
+internal sealed class TwoDimensionalNoteConfiguration : IEntityTypeConfiguration<TwoDimensionalNote>
 {
-    public void Configure(EntityTypeBuilder<TwoDimentionalNote> builder)
+    public void Configure(EntityTypeBuilder<TwoDimensionalNote> builder)
     {
         builder.HasBaseType<NoteBase>();
     }

@@ -1,12 +1,12 @@
 ﻿using DailyNotesChart.Application.Abstractions.MediatrSpecific;
 using DailyNotesChart.Application.Abstractions.Persistance;
-using DailyNotesChart.Application.DTOs.Charts;
+using DailyNotesChart.Application.ReadModels;
 using DailyNotesChart.Domain.Shared.ResultPattern;
 using Microsoft.EntityFrameworkCore;
 
 namespace DailyNotesChart.Application.Operations.Charts.Queries;
 
-internal sealed class GetAllChartsForSpecifiedChartGroupQueryHandler : IQueryHandler<GetAllChartsForSpecifiedChartGroupQuery, List<ChartReadDto>>
+internal sealed class GetAllChartsForSpecifiedChartGroupQueryHandler : IQueryHandler<GetAllChartsForSpecifiedChartGroupQuery, List<ChartBaseReadModel>>
 {
     private readonly IReadOnlyRepository _repository;
 
@@ -15,20 +15,12 @@ internal sealed class GetAllChartsForSpecifiedChartGroupQueryHandler : IQueryHan
         _repository = repository;
     }
 
-    public async Task<Result<List<ChartReadDto>>> Handle(GetAllChartsForSpecifiedChartGroupQuery request, CancellationToken cancellationToken)
+    public async Task<Result<List<ChartBaseReadModel>>> Handle(GetAllChartsForSpecifiedChartGroupQuery request, CancellationToken cancellationToken)
     {
-        var timeOnlyChartQuery = _repository.TimeOnlyCharts
-            .Where(chart => chart.ChartGroupId == request.ChartGroupId)
-            .Select(chart => new TimeOnlyChartReadDto(chart.Id, chart.Date, chart.ChartGroupId, chart.Notes.ToList()));
+        var chartsQuery = _repository.Charts;
 
-        var twoDimensionalChartQuery = _repository.TwoDimensionalCharts
-            .Where(chart => chart.ChartGroupId == request.ChartGroupId)
-            .Select(chart => new TwoDimensionalChartReadDto(chart.Id, chart.Date, chart.ChartGroupId, chart.Notes.ToList(), chart.YAxeValues, chart.YAxeName));
+        var chartsForSpecifiedChartGroupId = await chartsQuery.Where(c => c.ChartGroupId ==  request.ChartGroupId).ToListAsync();
 
-        List<ChartReadDto> charts = await timeOnlyChartQuery.Cast<ChartReadDto>().Concat(twoDimensionalChartQuery.Cast<ChartReadDto>())
-            .OrderBy(chart => chart.Date)
-            .ToListAsync();
-
-        return Result.Success(charts);
+        return Result.Success(chartsForSpecifiedChartGroupId);
     }
 }

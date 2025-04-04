@@ -1,3 +1,9 @@
 ﻿namespace DailyNotesChart.Application.ReadModels;
 
-public sealed record DefaultChartTemplateReadModel(string YAxeName, double Start, double End, bool IsInteger);
+public sealed class DefaultChartTemplateReadModel
+{
+    public string YAxeName { get; init; } = null!;
+    public double Start {  get; init; }
+    public double End { get; init; }
+    public bool IsInteger { get; init; }
+};

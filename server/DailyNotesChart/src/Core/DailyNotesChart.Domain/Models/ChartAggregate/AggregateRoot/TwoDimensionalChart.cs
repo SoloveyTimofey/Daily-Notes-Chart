@@ -6,9 +6,9 @@ using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Domain.Models.ChartAggregate.AggregateRoot;
 
-public sealed class TwoDimentionalChart : ChartBase
+public sealed class TwoDimensionalChart : ChartBase
 {
-    private TwoDimentionalChart(
+    private TwoDimensionalChart(
         ChartId id,
         ChartSummary summary,
         ChartDate date,
@@ -25,7 +25,7 @@ public sealed class TwoDimentionalChart : ChartBase
     #region For EF Core
     // Return to this
     #pragma warning disable
-    private TwoDimentionalChart(
+    private TwoDimensionalChart(
         ChartId id,
         ChartSummary summary,
         ChartDate date,
@@ -34,9 +34,9 @@ public sealed class TwoDimentionalChart : ChartBase
     }
     #pragma warning enable
     // Method for EF Core
-    private static Result<TwoDimentionalChart> CreateEFCore(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
+    private static Result<TwoDimensionalChart> CreateEFCore(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
         Result.Success(
-            new TwoDimentionalChart(
+            new TwoDimensionalChart(
                 id: new ChartId(Guid.NewGuid()),
                 summary,
                 date,
@@ -52,9 +52,9 @@ public sealed class TwoDimentionalChart : ChartBase
     public YAxeValues YAxeValues { get; private set; }
     public YAxeName YAxeName { get; private set; }
 
-    internal static Result<TwoDimentionalChart> Create(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
+    internal static Result<TwoDimensionalChart> Create(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName) =>
         Result.Success(
-            new TwoDimentionalChart(
+            new TwoDimensionalChart(
                 id: new ChartId(Guid.NewGuid()),
                 summary,
                 date,
@@ -66,9 +66,9 @@ public sealed class TwoDimentionalChart : ChartBase
 
     protected override bool CheckIfChartDoesNotContainDuplicateNote(NoteBase noteToAdd)
     {
-        var twoDimensionalNoteToAdd = (TwoDimentionalNote)noteToAdd;
+        var twoDimensionalNoteToAdd = (TwoDimensionalNote)noteToAdd;
 
-        if (Notes.Cast<TwoDimentionalNote>().Any(existingNote =>
+        if (Notes.Cast<TwoDimensionalNote>().Any(existingNote =>
             existingNote.Time == twoDimensionalNoteToAdd.Time ||
             twoDimensionalNoteToAdd.YAxeValue == existingNote.YAxeValue))
         {
@@ -80,11 +80,11 @@ public sealed class TwoDimentionalChart : ChartBase
 
     protected override (bool isValid, SpecifiedInvalidNoteTypeForChartException? exception) CheckIfNoteTypeValid(NoteBase note)
     {
-        if (note is not TwoDimentionalNote)
+        if (note is not TwoDimensionalNote)
         {
             var exception = new SpecifiedInvalidNoteTypeForChartException(
-                chartType: typeof(TwoDimentionalChart),
-                requiredNoteType: typeof(TwoDimentionalNote)
+                chartType: typeof(TwoDimensionalChart),
+                requiredNoteType: typeof(TwoDimensionalNote)
             );
 
             return (isValid: false, exception);

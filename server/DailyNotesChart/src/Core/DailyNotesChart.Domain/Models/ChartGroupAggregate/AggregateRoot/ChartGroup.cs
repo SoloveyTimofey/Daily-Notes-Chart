@@ -83,7 +83,7 @@ public sealed class ChartGroup : AggregateRoot<ChartGroupId>
     /// <exception cref="ProvidedChartWithInvalidChartGroupIdException"/>
     public Result AddChart(ChartBase chartToAdd)
     {
-        // Bussiness rule: do not add chart with existing date in chart group
+        // Business rule: do not add chart with existing date in chart group
         if (_charts.Any(currentChart => currentChart.Date == chartToAdd.Date))
         {
             return Result.Failure(DomainErrors.ChartGroup.CannotAddChartWithExistingDateInChartGroup);
