@@ -11,14 +11,14 @@ namespace DailyNotesChart.Domain.UnitTests.Models.ChartGroupAggregate.NoteCluste
 [TestFixture]
 public sealed class TwoDimensionalNoteTests
 {
-    private TwoDimentionalChart _chart;
+    private TwoDimensionalChart _chart;
 
     [SetUp]
     public void SetUp()
     {
         var yAxeValues = YAxeValues.Create(0, 10, true).Value!;
 
-        _chart = TwoDimentionalChart.Create(
+        _chart = TwoDimensionalChart.Create(
             Arg.Any<ChartSummary>(),
             Arg.Any<ChartDate>(),
             Arg.Any<ChartGroupId>(),
@@ -32,7 +32,7 @@ public sealed class TwoDimensionalNoteTests
     {
         // Act & Assert
         Assert.Throws<SpecifiedYAxeValuOutOfRangeException>(
-            () => TwoDimentionalNote.Create(
+            () => TwoDimensionalNote.Create(
                 _chart.Id,
                 Arg.Any<TimeOnly>(),
                 Arg.Any<Color>(),
@@ -48,7 +48,7 @@ public sealed class TwoDimensionalNoteTests
     {
         // Act & Assert
         Assert.Throws<SpecifiedYAxeValuOutOfRangeException>(
-            () => TwoDimentionalNote.CreateTemplateBased(
+            () => TwoDimensionalNote.CreateTemplateBased(
                 _chart.Id,
                 Arg.Any<TimeOnly>(),
                 100,

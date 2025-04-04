@@ -8,6 +8,6 @@ internal sealed class NoteTemplateReadModelConfiguration : IEntityTypeConfigurat
 {
     public void Configure(EntityTypeBuilder<NoteTemplateReadModel> builder)
     {
-        builder.HasKey(nt => nt.Id);   
+        builder.HasKey(nt => nt.Id);
     }
 }

@@ -12,6 +12,7 @@ writeOptionsBuilder.UseSqlServer("Server=.;Database=DailyNotesChart;User Id=sa;P
 using var writeContext = new DailyNotesChartWriteDbContext(writeOptionsBuilder.Options);
 
 var chartGroupsFromReadContext = readContext.Charts;
+var res = chartGroupsFromReadContext.ToList();
 var chartGroupsFromWriteContext = writeContext.ChartGroups;
 
 Console.ReadLine();

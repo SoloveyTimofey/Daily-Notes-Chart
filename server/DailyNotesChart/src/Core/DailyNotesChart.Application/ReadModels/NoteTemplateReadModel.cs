@@ -1,9 +1,9 @@
 ﻿namespace DailyNotesChart.Application.ReadModels;
 
-public class NoteTemplateReadModel
+public sealed class NoteTemplateReadModel
 {
-    public Guid Id { get; set; }
-    public Guid ChartGroupId { get;set; }
-    public string Color { get; set; } = string.Empty;
-    public string Description { get; set; } = string.Empty;
+    public Guid Id { get; init; }
+    public Guid ChartGroupId { get; init; }
+    public string Color { get; init; } = null!;
+    public string Description { get; init; } = null!;
 }

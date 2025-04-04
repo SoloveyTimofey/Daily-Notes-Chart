@@ -1,14 +1,11 @@
-﻿using DailyNotesChart.Domain.Models.ChartGroupAggregate.AggregateRoot;
-
-namespace DailyNotesChart.Application.ReadModels;
+﻿namespace DailyNotesChart.Application.ReadModels;
 
 public abstract class ChartBaseReadModel
 {
-    public Guid Id { get; set; }
-    public DateOnly Date { get; set; }
-    public string? Summary { get; set; }
-    public Guid ChartGroupId { get; set; }
-    public ChartGroupReadModel ChartGroup { get; set; } = null!;
+    public Guid Id { get; init; }
+    public string? Summary { get; init; } = null!;
+    public DateOnly Date { get; init; }
+    public Guid ChartGroupId { get; init; }
 
-    public IList<NoteBaseReadModel> Notes { get; set; } = [];
+    public List<NoteBaseReadModel> Notes { get; init; } = [];
 }

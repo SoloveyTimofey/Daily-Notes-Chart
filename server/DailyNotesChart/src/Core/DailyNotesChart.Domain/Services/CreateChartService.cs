@@ -28,14 +28,14 @@ public class CreateChartService
         return createResult;
     }
 
-    public async Task<Result<TwoDimentionalChart>> CreateTwoDimensionalChartAsync(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName)
+    public async Task<Result<TwoDimensionalChart>> CreateTwoDimensionalChartAsync(ChartSummary summary, ChartDate date, ChartGroupId chartGroupId, YAxeValues yAxeValues, YAxeName yAxeName)
     {
         if (await _chartGroupRepository.DoesChartWithSpecifiedDateExistInSpecifiedChartGroup(date, chartGroupId))
         {
-            return Result.Failure<TwoDimentionalChart>(DomainErrors.ChartGroup.CannotAddChartWithExistingDateInChartGroup);
+            return Result.Failure<TwoDimensionalChart>(DomainErrors.ChartGroup.CannotAddChartWithExistingDateInChartGroup);
         }
 
-        var createResult = TwoDimentionalChart.Create(summary, date, chartGroupId, yAxeValues, yAxeName);
+        var createResult = TwoDimensionalChart.Create(summary, date, chartGroupId, yAxeValues, yAxeName);
 
         return createResult;
     }

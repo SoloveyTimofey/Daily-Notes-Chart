@@ -18,11 +18,11 @@ internal sealed class DailyNotesChartWriteDbContext : IdentityDbContext<Applicat
     public DbSet<ChartGroup> ChartGroups { get; set; }
     public DbSet<ChartBase> Charts { get; set; }
     public DbSet<TimeOnlyChart> TimeOnlyCharts { get; set; }
-    public DbSet<TwoDimentionalChart> TwoDimensionalCharts { get; set; }
+    public DbSet<TwoDimensionalChart> TwoDimensionalCharts { get; set; }
     public DbSet<NoteTemplate> NoteTemplates { get; set; }
     public DbSet<NoteBase> Notes { get; set; }
     public DbSet<TimeOnlyNote> TimeOnlyNotes { get; set; }
-    public DbSet<TwoDimentionalNote> TwoDimentionalNotes { get; set; }
+    public DbSet<TwoDimensionalNote> TwoDimentionalNotes { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

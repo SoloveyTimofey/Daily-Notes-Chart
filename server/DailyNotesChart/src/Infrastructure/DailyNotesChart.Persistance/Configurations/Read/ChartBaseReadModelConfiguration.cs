@@ -14,14 +14,14 @@ internal sealed class ChartBaseReadModelConfiguration : IEntityTypeConfiguration
 
         builder.UseTphMappingStrategy();
 
-        builder.HasOne(c => c.ChartGroup)
-            .WithMany()
-            .HasForeignKey(c => c.ChartGroupId);
-
         builder.HasMany(c => c.Notes)
            .WithOne()
            .HasForeignKey(n => n.ChartId);
 
         builder.Property(c => c.Summary).IsRequired(false);
+
+        builder.HasDiscriminator<string>("Discriminator")
+            .HasValue<TwoDimensionalChartReadModel>("TwoDimensionalChart")
+            .HasValue<TimeOnlyChartReadModel>("TimeOnlyChart");
     }
 }

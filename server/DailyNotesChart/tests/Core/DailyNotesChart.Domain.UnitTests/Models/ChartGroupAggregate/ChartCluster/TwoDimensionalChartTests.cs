@@ -10,7 +10,7 @@ namespace DailyNotesChart.Domain.UnitTests.Models.ChartGroupAggregate.ChartClust
 [TestFixture]
 public sealed class TwoDimensionalChartTests : ChartTestBase
 {
-    private TwoDimentionalChart _chart;
+    private TwoDimensionalChart _chart;
 
     [SetUp]
     public void SetUp()

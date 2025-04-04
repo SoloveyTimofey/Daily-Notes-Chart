@@ -8,12 +8,12 @@ using DailyNotesChart.Domain.Shared.ResultPattern;
 
 namespace DailyNotesChart.Domain.Models.ChartGroupAggregate.NoteCluster;
 
-public sealed class TwoDimentionalNote : NoteBase
+public sealed class TwoDimensionalNote : NoteBase
 {
     #pragma warning disable
-    private TwoDimentionalNote() { } // EF Core constructor
+    private TwoDimensionalNote() { } // EF Core constructor
     #pragma warning disable
-    private TwoDimentionalNote(
+    private TwoDimensionalNote(
         ChartId chartId,
         TimeOnly time,
         Color color,
@@ -25,7 +25,7 @@ public sealed class TwoDimentionalNote : NoteBase
     public double YAxeValue { get; private set; }
 
     /// <exception cref="SpecifiedYAxeValuOutOfRangeException"></exception>
-    public static Result<TwoDimentionalNote> Create(ChartId chartId, TimeOnly time, Color color, NoteDescription description, double yAxeValue, TwoDimentionalChart chart)
+    public static Result<TwoDimensionalNote> Create(ChartId chartId, TimeOnly time, Color color, NoteDescription description, double yAxeValue, TwoDimensionalChart chart)
     {
         bool isYAxeValueValid = ValidateYAxeValue(yAxeValue, chartId, chart);
 
@@ -35,7 +35,7 @@ public sealed class TwoDimentionalNote : NoteBase
         }
 
         return Result.Success(
-            new TwoDimentionalNote(
+            new TwoDimensionalNote(
                 chartId,
                 time,
                 color,
@@ -46,7 +46,7 @@ public sealed class TwoDimentionalNote : NoteBase
     }
 
     /// <exception cref="SpecifiedYAxeValuOutOfRangeException"></exception>
-    public static Result<TwoDimentionalNote> CreateTemplateBased(ChartId chartId, TimeOnly time, double yAxeValue, TwoDimentionalChart chart, NoteTemplate template)
+    public static Result<TwoDimensionalNote> CreateTemplateBased(ChartId chartId, TimeOnly time, double yAxeValue, TwoDimensionalChart chart, NoteTemplate template)
     {
         bool isYAxeValueValid = ValidateYAxeValue(yAxeValue, chartId, chart);
 
@@ -56,7 +56,7 @@ public sealed class TwoDimentionalNote : NoteBase
         }
 
         return Result.Success(
-            new TwoDimentionalNote(
+            new TwoDimensionalNote(
                 chartId,
                 time,
                 template.Color,
@@ -66,7 +66,7 @@ public sealed class TwoDimentionalNote : NoteBase
         );
     }
 
-    private static bool ValidateYAxeValue(double yAxeValue, ChartId chartId, TwoDimentionalChart chart)
+    private static bool ValidateYAxeValue(double yAxeValue, ChartId chartId, TwoDimensionalChart chart)
     {
         YAxeValues yValues = chart.YAxeValues;
 

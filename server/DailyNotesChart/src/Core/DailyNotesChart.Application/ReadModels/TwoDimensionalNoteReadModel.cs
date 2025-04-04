@@ -2,5 +2,5 @@
 
 public sealed class TwoDimensionalNoteReadModel : NoteBaseReadModel
 {
-    public double YAxeValue { get; set; }
+    public double YAxeValue { get; init; }
 }

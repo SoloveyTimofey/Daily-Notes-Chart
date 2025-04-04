@@ -13,8 +13,8 @@ public abstract class ChartTestBase
 
     protected abstract void AddNotes();
 
-    protected TwoDimentionalChart CreateTwoDimensionalChart() =>
-        TwoDimentionalChart.Create(
+    protected TwoDimensionalChart CreateTwoDimensionalChart() =>
+        TwoDimensionalChart.Create(
             Arg.Any<ChartSummary>(),
             Arg.Any<ChartDate>(),
             Arg.Any<ChartGroupId>(),
@@ -22,8 +22,8 @@ public abstract class ChartTestBase
             Arg.Any<YAxeName>()
         ).Value!;
 
-    protected TwoDimentionalNote CreateTwoDimensionalNote(ChartId chartId, TwoDimentionalChart twoDimentionalChart) =>
-        TwoDimentionalNote.Create(
+    protected TwoDimensionalNote CreateTwoDimensionalNote(ChartId chartId, TwoDimensionalChart twoDimentionalChart) =>
+        TwoDimensionalNote.Create(
             chartId,
             Arg.Any<TimeOnly>(),
             Arg.Any<Color>(),
